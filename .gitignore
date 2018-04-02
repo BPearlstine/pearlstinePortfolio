@@ -12,3 +12,5 @@ db.sqlite3
 /static
 
 # End of https://www.gitignore.io/api/django
+
+jobs/migrations/
