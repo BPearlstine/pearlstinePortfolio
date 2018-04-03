@@ -58,9 +58,9 @@
         <hr />
         {%  for blog in blogs.all %}
         <div class="container">
-          {{blog.title}}
+          <h3><a href="{% url 'detail' blog.id %}">{{blog.title}}</a></h3>
           <br />
-          <img class="image-fluid" src="{{blog.image.url}}" alt="blog image" style="width:500px;height:200px;">
+          <img class="image-fluid rounded" src="{{blog.image.url}}" alt="blog image" style="width:500px;height:200px;">
           <br />
           {{blog.summary}}...
           <hr />

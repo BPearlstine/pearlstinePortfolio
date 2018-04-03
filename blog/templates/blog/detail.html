@@ -51,15 +51,12 @@
       </section>
 
       <div class="container">
-        <h1 class="text-center">Blog</h1>
+        <h1 class="text-center">{{blog.title}}</h1>
         <br />
         <br />
-        <h2 class="text-center">Latest Posts</h2>
         <hr />
         <div class="container">
-          {{blog.title}}
-          <br />
-          <img class="image-fluid" src="{{blog.image.url}}" alt="blog image" style="width:500px;height:200px;">
+          <img class="image-fluid rounded" src="{{blog.image.url}}" alt="blog image" style="width:500px;height:200px;">
           <br />
           {{blog.body}}
           <hr />
