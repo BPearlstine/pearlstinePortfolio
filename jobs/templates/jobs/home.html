@@ -1,7 +1,21 @@
 
 {% extends 'base.html' %}
 {% block content %}
-
+    <div class="container">
+      <h1 class="text-center">What's New</h1>
+      <br />
+      <hr />
+      <div class="container">
+        <h3><a href="{% url 'detail' blog.id %}">{{blog.title}}</a></h3>
+        <br />
+        <img class="image-fluid rounded" src="{{blog.image.url}}" alt="blog image" style="width:500px;height:200px;">
+        <br />
+        {{blog.summary}}...
+        <hr />
+        {{blog.pub_day}}
+      </div>
+    </div>
+      <hr>
       <div class="album py-5 bg-light">
         <div class="container">
           <div class="row">
