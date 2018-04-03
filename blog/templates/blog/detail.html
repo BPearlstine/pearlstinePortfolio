@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
   <head>
     {% load staticfiles %}
     <meta charset="utf-8">
@@ -29,7 +28,7 @@
             </div>
           </div>
           <div class = "navbar-nav ml-auto">
-              <a class="nav-item nav-link" href="{% url 'blogHome' %}">Blog <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link active" href="{% url 'blogHome' %}">Blog <span class="sr-only">(current)</span></a>
               <a class="nav-item nav-link" href="{% static 'BenPearlstineResume.pdf' %}">Resume <span class="sr-only">(current)</span></a>
               <a class="nav-item nav-link" href="https://github.com/BPearlstine"><i class="fa fa-github" aria-hidden="true"></i> GitHub</a>
               <a class="nav-item nav-link" href="https://www.linkedin.com/in/ben-pearlstine-279979150"><i class="fa fa-linkedin-square" aria-hidden="true"> LinkedIn</i></a>
@@ -51,29 +50,20 @@
         </div>
       </section>
 
-      <div class="album py-5 bg-light">
+      <div class="container">
+        <h1 class="text-center">Blog</h1>
+        <br />
+        <br />
+        <h2 class="text-center">Latest Posts</h2>
+        <hr />
         <div class="container">
-          <div class="row">
-
-            {%  for job in jobs.all %}
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{{ job.image.url }}" />
-                <div class="card-body">
-                  <p class="card-text">{{  job.summary }}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {%  endfor %}
-          </div>
+          {{blog.title}}
+          <br />
+          <img class="image-fluid" src="{{blog.image.url}}" alt="blog image" style="width:500px;height:200px;">
+          <br />
+          {{blog.body}}
+          <hr />
+          {{blog.pub_day}}
         </div>
       </div>
 
