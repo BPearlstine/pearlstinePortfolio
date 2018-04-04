@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if error %}
+  {{ error }}
+{% endif %}
+<div class="col align-self-start text-center">
+  <h4 class="">Add new Job</h4>
+    <form class="" action="{% url 'newJob' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      Summary:<br>
+      <input type="text" name="jobSummary"><br>
+      Detail:<br>
+      <input type="text" name="jobDetail"><br>
+      Image:
+      <input type="file" name="jobImage"><br><br>
+      <input class="btn btn-primary" type="submit" name="jobSubmit" value="Submit new Job">
+    </form>
+</div>
+{% endblock %}

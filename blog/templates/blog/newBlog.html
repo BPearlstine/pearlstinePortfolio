@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if error %}
+  {{ error }}
+{% endif %}
+<div class="col align-self-end text-center">
+  <h4 class="">Add new Blog</h4>
+  <form class="" action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    Title:<br>
+    <input type="text" name="blogTitle"><br>
+    Blog:<br>
+    <input type="textbox" name="blogBody"><br>
+    Image:
+    <input type="file" name="blogImage"><br><br>
+    <input class="btn btn-primary" type="submit" name="blogSubmit" value="Submit new Job">
+  </form>
+</div>
+</div>
+{% endblock %}
