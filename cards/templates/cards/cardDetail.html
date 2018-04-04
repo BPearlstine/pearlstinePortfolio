@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+      <div class="container">
+        <h1 class="text-center">{{card.name}}</h1>
+        <br />
+        <br />
+        <hr />
+        <div class="container">
+          <br />
+          {{card.set}}
+          <br>
+          {{card.artist}}
+          <br>
+          {{ card.quantity }}
+          <hr />
+        </div>
+      </div>
+
+{% endblock %}
