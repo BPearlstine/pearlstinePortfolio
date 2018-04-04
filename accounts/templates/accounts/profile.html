@@ -1,5 +1,34 @@
 
 {% extends 'base.html' %}
 {% block content %}
-  {{ current_user.username }}
+  <h3 class="text-center">Welcome back {{ current_user.first_name }}</h3>
+  <div class="container ">
+    <div class="row">
+      <div class="col align-self-start text-center">
+        <h4 class="">Add new Job</h4>
+          <form class="" action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+            Summary:<br>
+            <input type="text" name="jobSummary"><br>
+            Detail:<br>
+            <input type="text" name="jobDetail"><br>
+            Image:
+            <input type="file" name="jobImage"><br><br>
+            <input class="btn btn-primary" type="submit" name="jobSubmit" value="Submit new Job">
+          </form>
+      </div>
+      <div class="col align-self-end text-center">
+        <h4 class="">Add new Blog</h4>
+        <form class="" action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+          Title:<br>
+          <input type="text" name="blogTitle"><br>
+          Blog:<br>
+          <input type="textbox" name="blogBody"><br>
+          Image:
+          <input type="file" name="blogImage"><br><br>
+          <input class="btn btn-primary" type="submit" name="blogSubmit" value="Submit new Job">
+        </form>
+      </div>
+    </div>
+
+  </div>
 {% endblock %}
