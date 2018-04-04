@@ -7,12 +7,28 @@
   <h4 class="">Add new Job</h4>
     <form class="" action="{% url 'newJob' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      Summary:<br>
-      <input type="text" name="jobSummary"><br>
-      Detail:<br>
-      <input type="text" name="jobDetail"><br>
-      Image:
-      <input type="file" name="jobImage"><br><br>
+      <br>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Summary:</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="jobSummary">
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Detail:</span>
+        </div>
+        <textarea class="form-control" aria-label="With textarea" name="jobDetail"></textarea>
+      </div><br>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Upload Image:</span>
+        </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" name="jobImage">
+          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
+      </div>
       <input class="btn btn-primary" type="submit" name="jobSubmit" value="Submit new Job">
     </form>
 </div>
