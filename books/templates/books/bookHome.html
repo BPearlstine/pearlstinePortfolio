@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+
+      <div class="container">
+        <h1 class="text-center">Book Collection</h1>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Will become search bar" aria-label="searchbar" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Search Books</button>
+          </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+          <div class="col-8">
+            <h2 class="text-center">Latest Books</h2>
+            <hr />
+            {%  for book in books.all reversed %}
+            <div class="container">
+              <h3><a href="{% url 'bookDetail' book.id %}">{{book.title}}</a></h3>
+              <br />
+              {{book.author}}<br>
+              {{book.genre}}<br>
+              {{book.isbn}}
+              <hr />
+            </div>
+            {% endfor %}
+          </div>
+          <div class="col-4">
+            {% if error %}
+              {{ error }}
+            {% endif %}
+            <h2 class="text-center">Add New Books</h2>
+            <hr>
+            <form class="" action="{% url 'addBook' %}" method="post">
+              {% csrf_token %}
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="bookTitle">
+              </div>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Author</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="bookAuthor">
+              </div>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Genre</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="bookGenre">
+              </div>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">ISBN</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="bookIsbn">
+              </div>
+              <input type="submit" name="submit" value="Add new Book" class="btn btn-primary">
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+{% endblock %}

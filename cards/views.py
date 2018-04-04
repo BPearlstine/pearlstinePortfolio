@@ -15,21 +15,18 @@ def cardDetail(request,card_id):
 @login_required(login_url="/accounts/login")
 def addCard(request):
     if request.POST['cardName'] and request.POST['cardSet'] and request.POST['cardArtist'] and request.POST['cardQuantity']:
-        foundCard = False
         for card in Card.objects.all():
             if card.name == request.POST['cardName'] and card.set == request.POST['cardSet']:
                 card.quantity += int(request.POST['cardQuantity'])
                 card.save()
-                foundCard = True
                 return redirect('cardDetail',card.id)
-        if foundCard != True:
-            card = Card()
-            card.name = request.POST['cardName']
-            card.set = request.POST['cardSet']
-            card.artist = request.POST['cardArtist']
-            card.quantity = request.POST['cardQuantity']
-            card.save()
-            return redirect('cardDetail',card.id)
+        card = Card()
+        card.name = request.POST['cardName']
+        card.set = request.POST['cardSet']
+        card.artist = request.POST['cardArtist']
+        card.quantity = request.POST['cardQuantity']
+        card.save()
+        return redirect('cardDetail',card.id)
 
     else:
         return render(request, 'cards/cardHome.html', {'error':'All values must be filled out'})

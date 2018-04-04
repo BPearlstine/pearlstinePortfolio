@@ -22,13 +22,13 @@
       <br />
       <h2 class="text-center">Latest Books</h2>
       <hr />
-      {%  for card in latest_cards.all %}
+      {%  for book in latest_books.all %}
       <div class="container">
-        <h3><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></h3>
+        <h3><a href="{% url 'bookDetail' book.id %}">{{book.title}}</a></h3>
         <br />
-        {{card.set}}<br>
-        {{card.artist}}<br>
-        {{card.quantity}}
+        {{book.author}}<br>
+        {{book.genre}}<br>
+        {{book.isbn}}
         <hr />
       </div>
       {% endfor %}
