@@ -5,14 +5,12 @@
       <h1 class="text-center">What's New</h1>
       <br />
       <hr />
-      <div class="container">
-        <h3><a href="{% url 'detail' blog.id %}">{{blog.title}}</a></h3>
-        <br />
-        <img class="image-fluid rounded" src="{{blog.image.url}}" alt="blog image" style="width:500px;height:200px;">
-        <br />
-        {{blog.summary}}...
-        <hr />
-        {{blog.pub_day}}
+      <div class="media">
+        <img class="align-self-start mr-3 rounded" src="{{blog.image.url}}" alt="blog image" style="height: 100px;">
+        <div class="media-body">
+          <h5 class="mt-0"><a href="{% url 'detail' blog.id %}">{{blog.title}}</a></h5>{{blog.pub_day}}
+          <p>{{blog.summary}}...</p>
+        </div>
       </div>
     </div>
       <hr>
