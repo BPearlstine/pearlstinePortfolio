@@ -2,3 +2,12 @@
   background-image: url("bbb7.jpg");
   background-size: cover;
 }
+
+.card{
+  width: 18rem;
+  height: 15rem;
+}
+
+.jobCard{
+  padding-top: 25px;
+}

@@ -16,22 +16,17 @@
       </div>
     </div>
       <hr>
-      <div class="album py-5 bg-light">
+      <div class="album py-5">
         <div class="container">
+          <h2 class="text-center">Education and Technical Experience</h2>
           <div class="row">
 
             {%  for job in jobs.all %}
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top rounded" src="{{ job.image.url }}" />
+            <div class="col-md-4 jobCard">
+              <div class="card box-shadow">
+                <img class="card-img-top rounded" style="height: 150px;" src="{{ job.image.url }}" />
                 <div class="card-body">
                   <p class="card-text">{{  job.summary }}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
                 </div>
               </div>
             </div>
