@@ -23,7 +23,7 @@ def newBlog(request):
             blog.image = request.FILES['blogImage']
             blog.pub_date = timezone.datetime.now()
             blog.save()
-            return redirect('jobs/home.html')
+            return redirect('home')
         else:
             return render(request, 'blog/newBlog.html',{'error': 'All fields must be filled out.'})
     else:

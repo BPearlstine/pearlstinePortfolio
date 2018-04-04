@@ -7,12 +7,28 @@
   <h4 class="">Add new Blog</h4>
   <form class="" action="{% url 'newBlog' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    Title:<br>
-    <input type="text" name="blogTitle"><br>
-    Blog:<br>
-    <input type="textbox" name="blogBody"><br>
-    Image:
-    <input type="file" name="blogImage"><br><br>
+    <br>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Title:</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="blogTitle">
+    </div>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Blog:</span>
+      </div>
+      <textarea class="form-control" aria-label="With textarea" name="blogBody"></textarea>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Upload Image:</span>
+      </div>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile01" name="blogImage">
+        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+      </div>
+    </div>
     <input class="btn btn-primary" type="submit" name="blogSubmit" value="Submit new Job">
   </form>
 </div>
