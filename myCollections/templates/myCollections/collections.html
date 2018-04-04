@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="row">
+    <div class="col lg-4">
+      <h1 class="text-center">Card Collection</h1>
+      <br />
+      <br />
+      <h2 class="text-center">Latest Cards</h2>
+      <hr />
+      {%  for card in latest_cards.all %}
+      <div class="container">
+        <h3><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></h3>
+        <br />
+        {{card.set}}<br>
+        {{card.artist}}<br>
+        {{card.quantity}}
+        <hr />
+      </div>
+      {% endfor %}
+    </div>
+    <div class="col lg-4">
+      <h1 class="text-center">Book Collection</h1>
+      <br />
+      <br />
+      <h2 class="text-center">Latest Books</h2>
+      <hr />
+      {%  for card in latest_cards.all %}
+      <div class="container">
+        <h3><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></h3>
+        <br />
+        {{card.set}}<br>
+        {{card.artist}}<br>
+        {{card.quantity}}
+        <hr />
+      </div>
+      {% endfor %}
+    </div>
+    <div class="col lg-4">
+      <h1 class="text-center">Comic Collection</h1>
+      <br />
+      <br />
+      <h2 class="text-center">Latest Comics</h2>
+      <hr />
+      {%  for card in latest_cards.all %}
+      <div class="container">
+        <h3><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></h3>
+        <br />
+        {{card.set}}<br>
+        {{card.artist}}<br>
+        {{card.quantity}}
+        <hr />
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf .urls.static import static
 import jobs.views
 import hangman.views
+import myCollections.views
 
 
 urlpatterns = [
@@ -26,6 +27,7 @@ urlpatterns = [
     path('', jobs.views.home, name='home'),
     path('jobs/newJob', jobs.views.newJob, name='newJob'),
     path('hangman/', hangman.views.hangman, name='hangman' ),
+    path('collections/', myCollections.views.collections, name='collections'),
     path('blog/', include('blog.urls')),
     path('accounts/', include('accounts.urls')),
     path('cards/', include('cards.urls')),
