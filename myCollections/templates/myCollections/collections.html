@@ -26,9 +26,9 @@
       <div class="container">
         <h3><a href="{% url 'bookDetail' book.id %}">{{book.title}}</a></h3>
         <br />
-        {{book.author}}<br>
-        {{book.genre}}<br>
-        {{book.isbn}}
+        <b>Author: </b>{{book.author}}<br>
+        <b>Genre: </b>{{book.genre}}<br>
+        <b>ISBN: </b>{{book.isbn}}
         <hr />
       </div>
       {% endfor %}
@@ -42,8 +42,8 @@
       <div class="container">
         <h3><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{comic.issue}}</a></h3>
         <br />
-        {{comic.graded}}<br>
-        {{comic.key}}
+        <b>Graded: </b>{{comic.graded}}<br>
+        <b>Key Issue: </b>{{comic.key}}
         <hr />
       </div>
       {% endfor %}

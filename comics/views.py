@@ -21,8 +21,8 @@ def addComic(request):
         comic = Comic()
         comic.title = request.POST['comicTitle']
         comic.issue = request.POST['comicIssue']
-        comic.Graded = request.POST['comicGraded']
-        comic.key = request.POST['comic.Key']
+        comic.graded = request.POST['comicGraded']
+        comic.key = request.POST['comicKey']
         comic.save()
         return redirect('comicDetail',comic.id)
 
