@@ -27,9 +27,13 @@
             {% endfor %}
           </div>
           <div class="col-4">
+            {% if error %}
+              {{ error }}
+            {% endif %}
             <h2 class="text-center">Add New Cards</h2>
             <hr>
-            <form class="" action="index.html" method="post">
+            <form class="" action="{% url 'addCard' %}" method="post">
+              {% csrf_token %}
               <div class="input-group ">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
