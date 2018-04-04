@@ -32,4 +32,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('cards/', include('cards.urls')),
     path('books/', include('books.urls')),
+    path('comics/', include('comics.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

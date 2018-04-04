@@ -34,17 +34,16 @@
       {% endfor %}
     </div>
     <div class="col lg-4">
-      <h1 class="text-center">Comic Collection</h1>
+      <a href="{% url 'comicHome' %}"><h1 class="text-center">Comic Collection</h1></a>
       <br />
       <h2 class="text-center">Latest Comics</h2>
       <hr />
-      {%  for card in latest_cards.all %}
+      {%  for comic in latest_comics.all %}
       <div class="container">
-        <h3><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></h3>
+        <h3><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{comic.issue}}</a></h3>
         <br />
-        {{card.set}}<br>
-        {{card.artist}}<br>
-        {{card.quantity}}
+        {{comic.graded}}<br>
+        {{comic.key}}
         <hr />
       </div>
       {% endfor %}

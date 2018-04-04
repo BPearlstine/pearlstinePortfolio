@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+
+      <div class="container">
+        <h1 class="text-center">Comic Collection</h1>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Will become search bar" aria-label="searchbar" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Search Comics</button>
+          </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+          <div class="col-8">
+            <h2 class="text-center">Latest Comics</h2>
+            <hr />
+            {%  for comic in comics.all reversed %}
+            <div class="container">
+              <h3><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{ comic.issue }}</a></h3>
+              <br />
+              {{comic.graded}}<br>
+              {{comic.key}}
+              <hr />
+            </div>
+            {% endfor %}
+          </div>
+          <div class="col-4">
+            {% if error %}
+              {{ error }}
+            {% endif %}
+            <h2 class="text-center">Add New Comics</h2>
+            <hr>
+            <form class="" action="{% url 'addComic' %}" method="post">
+              {% csrf_token %}
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="comicTitle">
+              </div>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Issue</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="comicIssue">
+              </div>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Graded</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="comicGraded">
+              </div>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Key</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="comicKey">
+              </div>
+              <input type="submit" name="submit" value="Add new Comic" class="btn btn-primary">
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+{% endblock %}

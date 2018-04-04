@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+      <div class="container">
+        <h1 class="text-center">{{comic.title}} {{comic.Issue}}</h1>
+        <br />
+        <br />
+        <hr />
+        <div class="container">
+          <br />
+          <b>Graded:</b> {{comic.graded}}<br>
+          <b>Key: </b> {{comic.key}}
+          <hr />
+        </div>
+      </div>
+
+{% endblock %}
