@@ -1,7 +1,14 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
+from blog.models import Blog
+from jobs.models import Job
 
+@login_required(login_url="/accounts/login")
+def profile(request):
+    current_user = request.user
+    return render(request, 'accounts/profile.html',{'current_user':current_user})
 
 def login(request):
     if request.method == 'POST':
