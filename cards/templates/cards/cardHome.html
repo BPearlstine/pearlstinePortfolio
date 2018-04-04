@@ -3,20 +3,62 @@
 
       <div class="container">
         <h1 class="text-center">Card Collection</h1>
-        <br />
-        <br />
-        <h2 class="text-center">Latest Cards</h2>
-        <hr />
-        {%  for card in cards.all reversed %}
-        <div class="container">
-          <h3><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></h3>
-          <br />
-          {{card.set}}<br>
-          {{card.artist}}<br>
-          {{card.quantity}}
-          <hr />
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Will become search bar" aria-label="searchbar" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Search Cards</button>
+          </div>
         </div>
-        {% endfor %}
-      </div>
+        <br />
+        <br />
+        <div class="row">
+          <div class="col-8">
+            <h2 class="text-center">Latest Cards</h2>
+            <hr />
+            {%  for card in cards.all reversed %}
+            <div class="container">
+              <h3><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></h3>
+              <br />
+              {{card.set}}<br>
+              {{card.artist}}<br>
+              {{card.quantity}}
+              <hr />
+            </div>
+            {% endfor %}
+          </div>
+          <div class="col-4">
+            <h2 class="text-center">Add New Cards</h2>
+            <hr>
+            <form class="" action="index.html" method="post">
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="cardName">
+              </div>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Set</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="cardSet">
+              </div>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Artist</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="cardArtist">
+              </div>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Quantity</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="cardQuantity">
+              </div>
+              <input type="submit" name="submit" value="Add new Card" class="btn btn-primary">
+              </form>
+            </div>
+          </div>
+        </div>
+
 
 {% endblock %}
