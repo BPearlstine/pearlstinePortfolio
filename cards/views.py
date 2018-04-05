@@ -41,11 +41,15 @@ def addCard(request):
 def cardSearch(request):
     cards = Card.objects.all()
     searchItem = request.POST['cardSearchItem'].upper()
-    matchingCards = []
+    matching = []
     for card in cards:
         if searchItem in card.name.upper() or searchItem in card.set.upper() or searchItem in card.artist.upper():
-            matchingCards.append(card)
-    if not matchingCards:
+            matching.append(card)
+    if not matching:
         return render(request, 'cards/cardSearchResults.html', {'isEmpty': 'Sorry we could not find any matching cards'})
     else:
+        paginator = Paginator(matching, 5)
+
+        page = request.GET.get('page')
+        matchingCards = paginator.get_page(page)
         return render(request, 'cards/cardSearchResults.html', {'matchingCards': matchingCards})

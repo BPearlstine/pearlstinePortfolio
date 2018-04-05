@@ -18,7 +18,7 @@
           <div class="col-8">
             <h2 class="text-center">Latest Comics</h2>
             <hr />
-            {%  for comic in comics.all reversed %}
+            {%  for comic in comics %}
             <div class="container">
               <h3><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{ comic.issue }}</a></h3>
               <br />
@@ -72,6 +72,29 @@
             </div>
           </div>
         </div>
+        <nav aria-label="Page navigation blog">
+          <ul class="pagination">
+            {% if comics.has_previous %}
+            <li class="page-item">
+              <a href="?page=1" class="page-link">first</a>
+            </li>
+            <li class="page-item">
+            <a href="?page={{ comics.previous_page_number }}" class="page-link">{{ comics.previous_page_number }}</a>
+            </li>
+            {% endif %}
+              <li class="page-item active">
+                <a class="page-link" href="#" class="page-link">{{ comics.number }} <span class="sr-only">(current)</span></a>
+              </li>
+            {% if comics.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ comics.next_page_number }}">{{ comics.next_page_number }}</a>
+            </li>
+            <li class="page-item">
+              <a href="?page={{ comics.paginator.num_pages }}" class="page-link">last</a>
+            </li>
+            {% endif %}
+            </ul>
+        </nav>
 
 
 {% endblock %}

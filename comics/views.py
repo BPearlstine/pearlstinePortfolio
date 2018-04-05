@@ -1,11 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Comic
 
 # Create your views here.
 def comicHome(request):
-    comics = Comic.objects
+    comics_list = Comic.objects.all()
+    paginator = Paginator(cards_list, 5)
+
+    page = request.GET.get('page')
+    comics = paginator.get_page(page)
     return render(request, 'comics/comicHome.html', {'comics':comics})
 
 def comicDetail(request,comic_id):
@@ -33,11 +38,15 @@ def addComic(request):
 def comicSearch(request):
     comics = Comic.objects.all()
     searchItem = request.POST['comicSearchTerm'].upper()
-    matchingComics = []
+    matching = []
     for comic in comics:
         if searchItem in comic.title.upper() or searchItem in comic.issue.upper() or searchItem in comic.graded.upper() or searchItem in comic.key.upper():
-            matchingComics.append(comic)
-    if not matchingComics:
+            matching.append(comic)
+    if not matching:
         return render(request, 'comics/comicSearchResults.html', {'isEmpty': 'Sorry we could not find any matching comics'})
     else:
+        paginator = Paginator(matching, 5)
+
+        page = request.GET.get('page')
+        matchingComics = paginator.get_page(page)
         return render(request, 'comics/comicSearchResults.html', {'matchingComics': matchingComics})

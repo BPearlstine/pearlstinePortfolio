@@ -11,7 +11,9 @@ class Comic(models.Model):
 
     def __str__(self):
         return self.title + " " +self.issue
-
+        
+    class Meta:
+        ordering = ['-id']
     # def cover(self):
     #
     #     vineKey = 2cffea4751659400ae5c38b31cbb63890d8c1e73

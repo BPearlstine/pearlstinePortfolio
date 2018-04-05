@@ -9,7 +9,7 @@
   <div class="col-8">
     <h2 class="text-center">Search Results</h2>
     <hr />
-    {%  for card in matchingCards reversed %}
+    {%  for card in matchingCards %}
     <div class="media" style="padding-bottom: 10px;">
       <img class="mr-3" src="{{card.findUrl}}" alt="Generic placeholder image">
       <div class="media-body">
@@ -24,5 +24,27 @@
     <h4 class="text-center"><a href="{% url 'cardHome' %}">Back to Card Collection</a></h4>
   </div>
 {% endif %}
-
+<nav aria-label="Page navigation blog">
+  <ul class="pagination">
+    {% if matchingCards.has_previous %}
+    <li class="page-item">
+      <a href="?page=1" class="page-link">first</a>
+    </li>
+    <li class="page-item">
+    <a href="?page={{ matchingCards.previous_page_number }}" class="page-link">{{ matchingCards.previous_page_number }}</a>
+    </li>
+    {% endif %}
+      <li class="page-item active">
+        <a class="page-link" href="#" class="page-link">{{ matchingCards.number }} <span class="sr-only">(current)</span></a>
+      </li>
+    {% if matchingCards.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ matchingCards.next_page_number }}">{{ matchingCards.next_page_number }}</a>
+    </li>
+    <li class="page-item">
+      <a href="?page={{ matchingCards.paginator.num_pages }}" class="page-link">last</a>
+    </li>
+    {% endif %}
+    </ul>
+</nav>
 {% endblock %}

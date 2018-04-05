@@ -38,11 +38,15 @@ def addBook(request):
 def bookSearch(request):
     books = Book.objects.all()
     searchItem = request.POST['bookSearchTerm'].upper()
-    matchingBooks = []
+    matching = []
     for book in books:
         if searchItem in book.title.upper() or searchItem in book.author.upper() or searchItem in book.genre.upper() or searchItem in book.isbn.upper():
-            matchingBooks.append(book)
-    if not matchingBooks:
+            matching.append(book)
+    if not matching:
         return render(request, 'books/bookSearchResults.html', {'isEmpty': 'Sorry we could not find any matching books'})
     else:
+        paginator = Paginator(matching, 5)
+
+        page = request.GET.get('page')
+        matchingBooks = paginator.get_page(page)
         return render(request, 'books/bookSearchResults.html', {'matchingBooks': matchingBooks})
