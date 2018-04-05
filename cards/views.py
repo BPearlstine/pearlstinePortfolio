@@ -12,12 +12,7 @@ def cardHome(request):
 
 def cardDetail(request,card_id):
     card = get_object_or_404(Card, pk=card_id)
-
-    payload = {'q':card.name,'order':card.set}
-    r = requests.get('https://api.scryfall.com/cards/search', params=payload)
-    time.sleep(0.1)
-    r_json = r.json()['data'][0]['image_uris']['small']
-    return render(request, 'cards/cardDetail.html',{'card':card,'r_json':r_json})
+    return render(request, 'cards/cardDetail.html',{'card':card})
 
 @login_required(login_url="/accounts/login")
 def addCard(request):
