@@ -21,7 +21,7 @@ def newBlog(request):
             blog.title = request.POST['blogTitle']
             blog.body = request.POST['blogBody']
             blog.image = request.FILES['blogImage']
-            blog.pub_date = timezone.datetime.now()
+            blog.pub_date = timezone.datetime.now() 
             blog.save()
             return redirect('home')
         else:
