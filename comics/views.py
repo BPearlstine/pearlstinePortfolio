@@ -28,3 +28,15 @@ def addComic(request):
 
     else:
         return render(request, 'comics/comicHome.html', {'error':'All values must be filled out'})
+
+def comicSearch(request):
+    comics = Comic.objects.all()
+    searchItem = request.POST['comicSearchTerm'].upper()
+    matchingComics = []
+    for comic in comics:
+        if searchItem in comic.title.upper() or searchItem in comic.issue.upper() or searchItem in comic.graded.upper() or searchItem in comic.key.upper():
+            matchingComics.append(comic)
+    if not matchingComics:
+        return render(request, 'comics/comicSearchResults.html', {'isEmpty': 'Sorry we could not find any matching comics'})
+    else:
+        return render(request, 'comics/comicSearchResults.html', {'matchingComics': matchingComics})

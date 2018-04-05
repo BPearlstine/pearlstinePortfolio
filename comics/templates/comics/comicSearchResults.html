@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if isEmpty %}
+  {{ isEmpty }}
+{% endif %}
+
+{% if matchingComics %}
+  <div class="col-8">
+    <h2 class="text-center">Search Results</h2>
+    <hr />
+    {%  for comic in matchingComics reversed %}
+    <div class="container">
+      <h3><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{ comic.issue }}</a></h3>
+      <br />
+      <b>Graded: </b>{{comic.graded}}<br>
+      <b>Key Issue: </b>{{comic.key}}<br>
+      <hr />
+    </div>
+    {% endfor %}
+    <h4 class="text-center"><a href="{% url 'comicHome' %}">Back to Comic Collection</a></h4>
+  </div>
+{% endif %}
+
+{% endblock %}

@@ -3,12 +3,15 @@
 
       <div class="container">
         <h1 class="text-center">Comic Collection</h1>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Will become search bar" aria-label="searchbar" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">Search Comics</button>
-          </div>
-        </div>
+          <form class="" action="{% url 'comicSearch' %}" method="post">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Search for comics" aria-label="searchbar" aria-describedby="basic-addon2" name="comicSearchTerm">
+              <div class="input-group-append">
+                <input class="btn btn-outline-secondary" type="submit" name="submit" value="Search Comics" >
+              </div>
+            </div>
+          </form>
         <br />
         <br />
         <div class="row">
