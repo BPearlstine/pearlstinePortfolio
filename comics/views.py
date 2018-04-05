@@ -7,7 +7,7 @@ from .models import Comic
 # Create your views here.
 def comicHome(request):
     comics_list = Comic.objects.all()
-    paginator = Paginator(cards_list, 5)
+    paginator = Paginator(comics_list, 5)
 
     page = request.GET.get('page')
     comics = paginator.get_page(page)
@@ -40,7 +40,7 @@ def comicSearch(request):
     searchItem = request.POST['comicSearchTerm'].upper()
     matching = []
     for comic in comics:
-        if searchItem in comic.title.upper() or searchItem in comic.issue.upper() or searchItem in comic.graded.upper() or searchItem in comic.key.upper():
+        if searchItem in comic.title.upper() or searchItem in comic.publisher.upper() or searchItem in comic.issue.upper() or searchItem in comic.graded.upper() or searchItem in comic.key.upper():
             matching.append(comic)
     if not matching:
         return render(request, 'comics/comicSearchResults.html', {'isEmpty': 'Sorry we could not find any matching comics'})
