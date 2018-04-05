@@ -17,3 +17,9 @@ class Card(models.Model):
         r = requests.get('https://api.scryfall.com/cards/search', params=payload)
         time.sleep(0.1)
         return r.json()['data'][0]['image_uris']['small']
+
+    def price(self):
+        payload = {'q':self.name,'order':self.set}
+        r = requests.get('https://api.scryfall.com/cards/search', params=payload)
+        time.sleep(0.1)
+        return r.json()['data'][0]['usd']
