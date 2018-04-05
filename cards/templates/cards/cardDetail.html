@@ -1,21 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
-      <div class="container">
-        <h1 class="text-center">{{card.name}}</h1>
-        <br />
-        <br />
-        <hr />
-        <div class="media">
-          <img class="mr-3" src="{{card.findUrl}}" alt="Generic placeholder image">
-          <div class="media-body">
-            <h5 class="mt-0">{{card.name}}</h5>
-            <b>Set:</b> {{card.set}}<br>
-            <b>Artist:</b> {{card.artist}}<br>
-            <b>Price: </b> {{card.price}}<br>
-            <b>Quantity: </b> {{card.quantity}}
-        </div>
-      </div>
-      <hr>
-      <h4 class="text-center"><a href="{% url 'cardHome' %}">Back to Card Collection</a></h4>
+<div class="container">
+  <div class="media">
+    <img class="mr-3" src="{{card.findUrl}}" alt="Generic placeholder image">
+    <div class="media-body">
+      <h1 class="mt-0">{{card.name}}</h1>
+      <b>Set:</b> {{card.set}}<br>
+      <b>Artist:</b> {{card.artist}}<br>
+      <b>Price: </b> {{card.price}}<br>
+      <b>Quantity: </b> {{card.quantity}}
+  </div>
+</div>
+<hr>
+  <h4 class="text-center"><a href="{% url 'cardHome' %}">Back to Card Collection</a></h4>
+</div>
 
 {% endblock %}

@@ -3,7 +3,7 @@
 
       <div class="container">
         <div class="media">
-          <img class="mr-3" src="{{book.cover}}" alt="Generic placeholder image">
+          <img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;">
           <div class="media-body">
             <h1 class="mt-0">{{book.title}}</h1>
             <b>Author:</b> {{book.author}}<br>
@@ -11,6 +11,7 @@
             <b>ISBN: </b> {{book.isbn}}
         </div>
       </div>
+      <hr>
         <h4 class="text-center"><a href="{% url 'bookHome' %}">Back to Book Collection</a></h4>
       </div>
 
