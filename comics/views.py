@@ -14,13 +14,14 @@ def comicDetail(request,comic_id):
 
 @login_required(login_url="/accounts/login")
 def addComic(request):
-    if request.POST['comicTitle'] and request.POST['comicIssue'] and request.POST['comicGraded'] and request.POST['comicKey']:
+    if request.POST['comicTitle'] and request.POST['comicIssue'] and request.POST['comicPublisher'] and request.POST['comicGraded'] and request.POST['comicKey']:
         for comic in Comic.objects.all():
             if comic.title == request.POST['comicTitle'] and comic.issue == request.POST['comicIssue']:
                 return redirect('comicDetail',comic.id)
         comic = Comic()
         comic.title = request.POST['comicTitle']
         comic.issue = request.POST['comicIssue']
+        comic.publisher = request.POST['comicPublisher']
         comic.graded = request.POST['comicGraded']
         comic.key = request.POST['comicKey']
         comic.save()
