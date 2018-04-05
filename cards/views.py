@@ -30,3 +30,15 @@ def addCard(request):
 
     else:
         return render(request, 'cards/cardHome.html', {'error':'All values must be filled out'})
+
+def cardSearch(request):
+    cards = Card.objects.all()
+    searchItem = request.POST['cardSearchItem'].upper()
+    matchingCards = []
+    for card in cards:
+        if searchItem in card.name.upper() or searchItem in card.set.upper() or searchItem in card.artist.upper():
+            matchingCards.append(card)
+    if not matchingCards:
+        return render(request, 'cards/cardSearchResults.html', {'isEmpty': 'Sorry we could not find any matching cards'})
+    else:
+        return render(request, 'cards/cardSearchResults.html', {'matchingCards': matchingCards})

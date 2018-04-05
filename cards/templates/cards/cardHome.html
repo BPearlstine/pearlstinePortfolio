@@ -3,12 +3,15 @@
 
       <div class="container">
         <h1 class="text-center">Card Collection</h1>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Will become search bar" aria-label="searchbar" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">Search Cards</button>
+        <form class="" action="{% url 'cardSearch' %}" method="post">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search for Cards" aria-label="searchbar" aria-describedby="basic-addon2" name="cardSearchItem">
+            <div class="input-group-append">
+              <input class="btn btn-outline-secondary" type="submit" name="submit" value="Search Cards">
+            </div>
           </div>
-        </div>
+        </form>
         <br />
         <br />
         <div class="row">
@@ -19,9 +22,9 @@
             <div class="container">
               <h3><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></h3>
               <br />
-              {{card.set}}<br>
-              {{card.artist}}<br>
-              {{card.quantity}}
+              <b>Set: </b>{{card.set}}<br>
+              <b>Artist: </b>{{card.artist}}<br>
+              <b>Quantity: </b>{{card.quantity}}
               <hr />
             </div>
             {% endfor %}

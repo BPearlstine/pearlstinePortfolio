@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if isEmpty %}
+  {{ isEmpty }}
+{% endif %}
+
+{% if matchingCards %}
+  <div class="col-8">
+    <h2 class="text-center">Search Results</h2>
+    <hr />
+    {%  for card in matchingCards reversed %}
+    <div class="container">
+      <h3><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></h3>
+      <br />
+      <b>Set: </b>{{card.set}}<br>
+      <b>Artist: </b>{{card.artist}}<br>
+      <b>Quantity: </b>{{card.quantity}}
+      <hr />
+    </div>
+    {% endfor %}
+    <h4 class="text-center"><a href="{% url 'cardHome' %}">Back to Card Collection</a></h4>
+  </div>
+{% endif %}
+
+{% endblock %}
