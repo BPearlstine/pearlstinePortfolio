@@ -3,10 +3,16 @@ from .models import Blog
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def blogHome(request):
-    blogs = Blog.objects
+    blogs_list = Blog.objects.all()
+    paginator = Paginator(blogs_list, 5)
+
+    page = request.GET.get('page')
+    blogs = paginator.get_page(page)
+
     return render(request,'blog/blogHome.html', {'blogs':blogs})
 
 def detail(request, blog_id):
@@ -21,7 +27,7 @@ def newBlog(request):
             blog.title = request.POST['blogTitle']
             blog.body = request.POST['blogBody']
             blog.image = request.FILES['blogImage']
-            blog.pub_date = timezone.datetime.now() 
+            blog.pub_date = timezone.datetime.now()
             blog.save()
             return redirect('home')
         else:
