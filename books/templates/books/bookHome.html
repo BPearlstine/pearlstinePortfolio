@@ -15,7 +15,7 @@
         <br />
         <br />
         <div class="row">
-          <div class="col-8">
+          <div class="col-sm col-8">
             <h2 class="text-center">Latest Books</h2>
             <hr />
             {%  for book in books %}
@@ -30,7 +30,7 @@
           </div>
             {% endfor %}
           </div>
-          <div class="col-4">
+          <div class="col-sm col-4">
             {% if error %}
               {{ error }}
             {% endif %}
@@ -64,6 +64,7 @@
               </div>
               <input type="submit" name="submit" value="Add new Book" class="btn btn-primary">
               </form>
+              <br>
             </div>
           </div>
         </div>

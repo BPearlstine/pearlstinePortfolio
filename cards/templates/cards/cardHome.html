@@ -15,7 +15,7 @@
         <br />
         <br />
         <div class="row">
-          <div class="col-8">
+          <div class="col-sm col-lg-8">
             <h2 class="text-center">Latest Cards</h2>
             <hr />
             {%  for card in cards %}
@@ -31,7 +31,7 @@
           </div>
             {% endfor %}
           </div>
-          <div class="col-4">
+          <div class="col-sm col-lg-4">
             {% if error %}
               {{ error }}
             {% endif %}
@@ -65,6 +65,7 @@
               </div>
               <input type="submit" name="submit" value="Add new Card" class="btn btn-primary">
               </form>
+              <br>
             </div>
           </div>
         </div>
