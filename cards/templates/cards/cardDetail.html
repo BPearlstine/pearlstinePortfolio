@@ -5,14 +5,16 @@
         <br />
         <br />
         <hr />
-        <div class="container">
-          <br />
-          <b>Set:</b> {{card.set}}<br>
-          <b>Artist:</b> {{card.artist}}<br>
-          <b>Quantity: </b> {{card.quantity}}
-          <hr />
+        <div class="media">
+          <img class="mr-3" src="{{r_json}}" alt="Generic placeholder image">
+          <div class="media-body">
+            <h5 class="mt-0">{{card.name}}</h5>
+            <b>Set:</b> {{card.set}}<br>
+            <b>Artist:</b> {{card.artist}}<br>
+            <b>Quantity: </b> {{card.quantity}}
         </div>
-        <h4 class="text-center"><a href="{% url 'cardHome' %}">Back to Card Collection</a></h4>
       </div>
+      <hr>
+      <h4 class="text-center"><a href="{% url 'cardHome' %}">Back to Card Collection</a></h4>
 
 {% endblock %}

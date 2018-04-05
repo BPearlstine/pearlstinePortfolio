@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from .models import Card
+import requests
+import time
 
 # Create your views here.
 def cardHome(request):
@@ -10,7 +12,12 @@ def cardHome(request):
 
 def cardDetail(request,card_id):
     card = get_object_or_404(Card, pk=card_id)
-    return render(request, 'cards/cardDetail.html',{'card':card})
+
+    payload = {'q':card.name,'order':card.set}
+    r = requests.get('https://api.scryfall.com/cards/search', params=payload)
+    time.sleep(0.1)
+    r_json = r.json()['data'][0]['image_uris']['small']
+    return render(request, 'cards/cardDetail.html',{'card':card,'r_json':r_json})
 
 @login_required(login_url="/accounts/login")
 def addCard(request):
