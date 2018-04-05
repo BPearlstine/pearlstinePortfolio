@@ -13,6 +13,7 @@
     <div class="container">
       <h3><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{ comic.issue }}</a></h3>
       <br />
+      <b>Publisher: </b>{{comic.publisher}}<br>
       <b>Graded: </b>{{comic.graded}}<br>
       <b>Key Issue: </b>{{comic.key}}<br>
       <hr />
