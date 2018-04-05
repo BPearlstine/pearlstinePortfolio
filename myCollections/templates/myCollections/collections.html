@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="container">
   <div class="row">
     <div class="col lg-4">
       <a href="{% url 'cardHome' %}"><h1 class="text-center">Card Collection</h1></a>
@@ -50,5 +51,5 @@
       {% endfor %}
     </div>
   </div>
-
+</div>
 {% endblock %}
