@@ -10,7 +10,7 @@
         <hr />
         {%  for blog in blogs.all reversed %}
         <div class="media" onclick="window.location='{% url 'detail' blog.id %}';" style="cursor: pointer;">
-          <img class="align-self-start mr-3 rounded" src="{{blog.image.url}}" alt="blog image" style="height: 100px;">
+          <img class="align-self-start mr-3 rounded" src="{{blog.image.url}}" alt="blog image" style="height: 200px; width: 200px;">
           <div class="media-body">
             <h5 class="mt-0">{{blog.title}}</h5><i class="far fa-clock"></i> {{blog.pub_day}}
             <p>{{blog.summary}}...</p>
