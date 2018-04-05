@@ -23,3 +23,6 @@ class Card(models.Model):
         r = requests.get('https://api.scryfall.com/cards/search', params=payload)
         time.sleep(0.1)
         return r.json()['data'][0]['usd']
+
+    class Meta:
+        ordering = ['-id']

@@ -1,13 +1,18 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Card
 import requests
 import time
 
 # Create your views here.
 def cardHome(request):
-    cards = Card.objects
+    cards_list = Card.objects.all()
+    paginator = Paginator(cards_list, 5)
+
+    page = request.GET.get('page')
+    cards = paginator.get_page(page)
     return render(request, 'cards/cardHome.html', {'cards':cards})
 
 def cardDetail(request,card_id):
