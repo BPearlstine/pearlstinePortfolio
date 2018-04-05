@@ -18,7 +18,7 @@
           <div class="col-8">
             <h2 class="text-center">Latest Books</h2>
             <hr />
-            {%  for book in books.all reversed %}
+            {%  for book in books %}
             <div class="media" style="padding-bottom: 10px;">
               <img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;">
               <div class="media-body">
@@ -67,6 +67,30 @@
             </div>
           </div>
         </div>
+        <nav aria-label="Page navigation blog">
+          <ul class="pagination">
+            {% if books.has_previous %}
+            <li class="page-item">
+              <a href="?page=1" class="page-link">first</a>
+            </li>
+            <li class="page-item">
+            <a href="?page={{ books.previous_page_number }}" class="page-link">{{ books.previous_page_number }}</a>
+            </li>
+            {% endif %}
+              <!-- Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}. -->
+              <li class="page-item active">
+                <a class="page-link" href="#" class="page-link">{{ books.number }} <span class="sr-only">(current)</span></a>
+              </li>
+            {% if books.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ books.next_page_number }}">{{ books.next_page_number }}</a>
+            </li>
+            <li class="page-item">
+              <a href="?page={{ books.paginator.num_pages }}" class="page-link">last</a>
+            </li>
+            {% endif %}
+            </ul>
+        </nav>
 
 
 {% endblock %}

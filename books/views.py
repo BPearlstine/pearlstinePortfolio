@@ -2,10 +2,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from .models import Book
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 # Create your views here.
 def bookHome(request):
-    books = Book.objects
+    books_list = Book.objects.all()
+    paginator = Paginator(books_list, 5)
+
+    page = request.GET.get('page')
+    books = paginator.get_page(page)
     return render(request, 'books/bookHome.html', {'books':books})
 
 def bookDetail(request,book_id):
