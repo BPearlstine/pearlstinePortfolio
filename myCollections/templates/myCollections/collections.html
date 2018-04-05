@@ -26,14 +26,15 @@
       <h2 class="text-center">Latest Books</h2>
       <hr />
       {%  for book in latest_books.all %}
-      <div class="container">
-        <h3><a href="{% url 'bookDetail' book.id %}">{{book.title}}</a></h3>
-        <br />
-        <b>Author: </b>{{book.author}}<br>
-        <b>Genre: </b>{{book.genre}}<br>
-        <b>ISBN: </b>{{book.isbn}}
-        <hr />
+      <div class="media" style="padding-bottom: 10px;">
+        <img class="mr-3" src="{{book.cover}}" alt="Generic placeholder image">
+        <div class="media-body">
+          <h3 class="mt-0"><a href="{% url 'bookDetail' book.id %}">{{book.title}}</a></h3>
+          <b>Author:</b> {{book.author}}<br>
+          <b>Genre:</b> {{book.genre}}<br>
+          <b>ISBN: </b> {{book.isbn}}
       </div>
+    </div>
       {% endfor %}
     </div>
     <div class="col lg-4">

@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
+
       <div class="container">
-        <h1 class="text-center">{{book.title}}</h1>
-        <br />
-        <br />
-        <hr />
-        <div class="container">
-          <br />
-          <b>Author:</b> {{book.author}}<br>
-          <b>Genre:</b> {{book.genre}}<br>
-          <b>ISBN: </b> {{book.isbn}}
-          <hr />
+        <div class="media">
+          <img class="mr-3" src="{{book.cover}}" alt="Generic placeholder image">
+          <div class="media-body">
+            <h1 class="mt-0">{{book.title}}</h1>
+            <b>Author:</b> {{book.author}}<br>
+            <b>Genre:</b> {{book.genre}}<br>
+            <b>ISBN: </b> {{book.isbn}}
         </div>
+      </div>
         <h4 class="text-center"><a href="{% url 'bookHome' %}">Back to Book Collection</a></h4>
       </div>
 
