@@ -25,13 +25,17 @@
   </div>
 {% endif %}
 <nav aria-label="Page navigation blog">
-  <ul class="pagination">
+  <ul class="pagination justify-content-center">
     {% if matchingBooks.has_previous %}
     <li class="page-item">
       <a href="?page=1" class="page-link">first</a>
     </li>
     <li class="page-item">
     <a href="?page={{ matchingBooks.previous_page_number }}" class="page-link">{{ matchingBooks.previous_page_number }}</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a href="#" class="page-link">previous</a>
     </li>
     {% endif %}
       <li class="page-item active">
@@ -43,6 +47,10 @@
     </li>
     <li class="page-item">
       <a href="?page={{ matchingBooks.paginator.num_pages }}" class="page-link">last</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="#">next</a>
     </li>
     {% endif %}
     </ul>
