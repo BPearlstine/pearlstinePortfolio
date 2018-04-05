@@ -4,6 +4,7 @@
     <div class="container">
       <h1 class="text-center">What's New</h1>
       <br />
+      {% for blog in blogs.all %}
       <hr />
       <div class="media" onclick="window.location='{% url 'detail' blog.id %}';" style="cursor: pointer;">
         <img class="align-self-start mr-3 rounded img-fluid" src="{{blog.image.url}}" alt="blog image" style="height: 200px; width: 200px;">
@@ -12,6 +13,7 @@
           <p>{{blog.summary}}...</p>
         </div>
       </div>
+      {% endfor %}
     </div>
       <hr>
       <div class="album py-5">

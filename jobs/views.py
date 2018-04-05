@@ -6,9 +6,9 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
-    blog = Blog.objects.latest('id')
+    blogs = Blog.objects.all().order_by('-id')[:2]
     jobs = Job.objects
-    return render(request, 'jobs/home.html', {'jobs':jobs,'blog':blog})
+    return render(request, 'jobs/home.html', {'jobs':jobs,'blogs':blogs})
 
 @login_required(login_url="/accounts/login")
 def newJob(request):
