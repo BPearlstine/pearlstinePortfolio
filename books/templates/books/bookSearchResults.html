@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if isEmpty %}
+  {{ isEmpty }}
+{% endif %}
+
+{% if matchingBooks %}
+  <div class="col-8">
+    <h2 class="text-center">Search Results</h2>
+    <hr />
+    {%  for book in matchingBooks reversed %}
+    <div class="container">
+      <h3><a href="{% url 'bookDetail' book.id %}">{{book.title}}</a></h3>
+      <br />
+      <b>Author: </b>{{book.author}}<br>
+      <b>Genre: </b>{{book.genre}}<br>
+      <b>ISBN: </b>{{book.isbn}}
+      <hr />
+    </div>
+    {% endfor %}
+    <h4 class="text-center"><a href="{% url 'bookHome' %}">Back to Book Collection</a></h4>
+  </div>
+{% endif %}
+
+{% endblock %}

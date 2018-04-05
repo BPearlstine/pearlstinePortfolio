@@ -3,12 +3,15 @@
 
       <div class="container">
         <h1 class="text-center">Book Collection</h1>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Will become search bar" aria-label="searchbar" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">Search Books</button>
+        <form class="" action="{% url 'bookSearch' %}" method="post">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search for Books" aria-label="searchbar" aria-describedby="basic-addon2" name='bookSearchTerm'>
+            <div class="input-group-append">
+              <input class="btn btn-outline-secondary" type="submit" name="submit" value="Search Books">
+            </div>
           </div>
-        </div>
+        </form>
         <br />
         <br />
         <div class="row">

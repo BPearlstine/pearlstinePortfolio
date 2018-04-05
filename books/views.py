@@ -28,3 +28,15 @@ def addBook(request):
 
     else:
         return render(request, 'book/bookHome.html', {'error':'All values must be filled out'})
+
+def bookSearch(request):
+    books = Book.objects.all()
+    searchItem = request.POST['bookSearchTerm'].upper()
+    matchingBooks = []
+    for book in books:
+        if searchItem in book.title.upper() or searchItem in book.author.upper() or searchItem in book.genre.upper() or searchItem in book.isbn.upper():
+            matchingBooks.append(book)
+    if not matchingBooks:
+        return render(request, 'books/bookSearchResults.html', {'isEmpty': 'Sorry we could not find any matching books'})
+    else:
+        return render(request, 'books/bookSearchResults.html', {'matchingBooks': matchingBooks})
