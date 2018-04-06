@@ -20,7 +20,7 @@
             <hr />
             {%  for card in cards %}
             <div class="media" style="padding-bottom: 10px;">
-              <img class="mr-3" src="{{card.findUrl}}" alt="Generic placeholder image">
+              <img class="mr-3" src="{{card.findUrl}}" alt=" ">
               <div class="media-body">
                 <h3><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></h3>
                 <b>Set:</b> {{card.set}}<br>
