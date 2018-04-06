@@ -20,7 +20,7 @@
             <hr />
             {%  for book in books %}
             <div class="media" style="padding-bottom: 10px;">
-              <img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;">
+              <!-- <img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;"> -->
               <div class="media-body">
                 <h3 class="mt-0"><a href="{% url 'bookDetail' book.id %}">{{book.title}}</a></h3>
                 <b>Author:</b> {{book.author}}<br>
