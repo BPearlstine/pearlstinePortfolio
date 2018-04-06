@@ -18,7 +18,7 @@ class Card(models.Model):
         payload = {'q':self.name,'order':self.set}
         r = requests.get('https://api.scryfall.com/cards/search', params=payload)
         if r.status_code == 200:
-             return r.json()['data'][0]['image_uris']['small']
+            return r.json()['data'][0]['image_uris']['small']
         else:
             return "#"
 
@@ -26,10 +26,10 @@ class Card(models.Model):
     def price(self):
         payload = {'q':self.name,'order':self.set}
         r = requests.get('https://api.scryfall.com/cards/search', params=payload)
-        if r.status_code == 200:  
-             return r.json()['data'][0]['usd']
+        if r.status_code == 200:
+            return r.json()['data'][0]['usd']
         else:
-             return "no data"
+            return "no data"
 
     class Meta:
         ordering = ['-id']
