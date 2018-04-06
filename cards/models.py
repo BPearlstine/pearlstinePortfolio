@@ -17,15 +17,19 @@ class Card(models.Model):
     def findUrl(self):
         payload = {'q':self.name,'order':self.set}
         r = requests.get('https://api.scryfall.com/cards/search', params=payload)
-
-        return r.json()['data'][0]['image_uris']['small']
+        if r.status_code == 200:
+             return r.json()['data'][0]['image_uris']['small']
+        else:
+            return "#"
 
     @rate_limited(0.1)
     def price(self):
         payload = {'q':self.name,'order':self.set}
         r = requests.get('https://api.scryfall.com/cards/search', params=payload)
-
-        return r.json()['data'][0]['usd']
+        if r.status_code == 200:  
+             return r.json()['data'][0]['usd']
+        else:
+             return "no data"
 
     class Meta:
         ordering = ['-id']

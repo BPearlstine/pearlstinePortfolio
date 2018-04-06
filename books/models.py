@@ -10,7 +10,10 @@ class Book(models.Model):
     def cover(self):
             payload = {'q':self.isbn,}
             r = requests.get('https://www.googleapis.com/books/v1/volumes', params=payload)
-            return r.json()['items'][0]['volumeInfo']['imageLinks']['smallThumbnail']
+            if r.status_code == 200:
+                 return r.json()['items'][0]['volumeInfo']['imageLinks']['smallThumbnail']
+            else:
+                 return "# "
 
     def __str__(self):
         return self.title
