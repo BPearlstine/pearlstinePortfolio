@@ -14,14 +14,16 @@ class Card(models.Model):
 
     def findUrl(self):
         payload = {'q':self.name,'order':self.set}
+        time.sleep(0.5)
         r = requests.get('https://api.scryfall.com/cards/search', params=payload)
-        time.sleep(0.1)
+
         return r.json()['data'][0]['image_uris']['small']
 
     def price(self):
         payload = {'q':self.name,'order':self.set}
+        time.sleep(0.5)
         r = requests.get('https://api.scryfall.com/cards/search', params=payload)
-        time.sleep(0.1)
+
         return r.json()['data'][0]['usd']
 
     class Meta:
