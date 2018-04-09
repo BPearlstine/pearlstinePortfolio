@@ -1,6 +1,9 @@
 from django.db import models
 import requests
 import time
+import logging
+
+logger = logging.getLogger(__name__)
 # Create your models here.
 class Comic(models.Model):
     title = models.CharField(max_length=100)
@@ -11,7 +14,7 @@ class Comic(models.Model):
 
     def __str__(self):
         return self.title + " " +self.issue
-        
+
     class Meta:
         ordering = ['-id']
     # def cover(self):

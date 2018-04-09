@@ -3,7 +3,9 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from .models import Book
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import logging
 
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 def bookHome(request):

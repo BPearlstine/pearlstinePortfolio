@@ -1,5 +1,9 @@
 from django.db import models
 import requests
+import logging
+
+logger = logging.getLogger(__name__)
+
 # Create your models here.
 class Book(models.Model):
     title = models.CharField(max_length=400)
@@ -11,7 +15,11 @@ class Book(models.Model):
         payload = {'q':self.isbn,}
         r = requests.get('https://www.googleapis.com/books/v1/volumes', params=payload)
         if r.status_code == 200:
-            return r.json()['items'][0]['volumeInfo']['imageLinks']['smallThumbnail']
+            try:
+                return r.json()['items'][0]['volumeInfo']['imageLinks']['smallThumbnail']
+            except:
+                logger.info("exception getting cover image in books.models")
+                return "#"
         else:
             return "# "
 
