@@ -4,6 +4,9 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import logging
+
+logger = logging.getLogger(pearlstinePortfolio.blog.models)
 
 # Create your views here.
 def blogHome(request):
@@ -17,17 +20,23 @@ def blogHome(request):
 
 def detail(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)
+    logger.info("Blog Detail for: %s", blog.title)
     return render(request, 'blog/detail.html', {'blog':blog})
 
 @login_required(login_url="/accounts/login")
 def newBlog(request):
     if request.method == 'POST':
+        logger.info("Constructing new blog")
         if request.POST['blogTitle'] and request.POST['blogBody'] and request.FILES['blogImage']:
             blog = Blog()
             blog.title = request.POST['blogTitle']
+            logger.info("New blog title: %s", blog.title)
             blog.body = request.POST['blogBody']
+            logger.info("New blog body: %s", blog.body )
             blog.image = request.FILES['blogImage']
+            logger.info("New blog image: %s", blog.image.url)
             blog.pub_date = timezone.datetime.now()
+            logger.info("New blog pub_date: %s", blog.pub_date)
             blog.save()
             return redirect('home')
         else:
