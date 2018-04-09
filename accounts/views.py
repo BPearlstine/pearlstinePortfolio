@@ -6,7 +6,7 @@ from blog.models import Blog
 from jobs.models import Job
 import logging
 
-logger = logging.getLogger(pearlstinePortfolio.accounts.views)
+logger = logging.getLogger(__name__)
 
 @login_required(login_url="/accounts/login")
 def profile(request):

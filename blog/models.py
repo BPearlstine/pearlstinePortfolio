@@ -1,7 +1,7 @@
 from django.db import models
 import logging
 
-logger = logging.getLogger(pearlstinePortfolio.blog.models)
+logger = logging.getLogger(__name__)
 # Create your models here.
 
 class Blog(models.Model):
@@ -15,7 +15,7 @@ class Blog(models.Model):
         return self.body[:200]
 
     def pub_day(self):
-        logger.info("pub_date for blog: %s", pub_date.strftime('%x'))
+        logger.info("pub_date for blog: %s", self.pub_date.strftime('%x'))
         return self.pub_date.strftime('%x')
 
     def __str__(self):

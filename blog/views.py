@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import logging
 
-logger = logging.getLogger(pearlstinePortfolio.blog.models)
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 def blogHome(request):
