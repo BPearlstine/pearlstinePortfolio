@@ -31,7 +31,7 @@
                 <tbody>
                     {%  for card in cards %}
                   <tr>
-                    <td><img class="mr-3" src="{{card.findUrl}}" alt=" "></td>
+                    <td><img class="mr-3" src="{{card.findUrl}}" alt="No Image "></td>
                     <td><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></td>
                     <td>{{ card.set }}</td>
                     <td> {{ card.artist }} </td>

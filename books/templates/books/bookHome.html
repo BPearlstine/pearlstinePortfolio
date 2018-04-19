@@ -3,7 +3,7 @@
 
       <div class="container">
         <h1 class="text-center">Book Collection</h1>
-        <form class="" action="{% url 'bookSearch' %}" method="post">
+        <!-- <form class="" action="{% url 'bookSearch' %}" method="post">
           {% csrf_token %}
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Search for Books" aria-label="searchbar" aria-describedby="basic-addon2" name='bookSearchTerm'>
@@ -11,14 +11,36 @@
               <input class="btn btn-outline-secondary" type="submit" name="submit" value="Search Books">
             </div>
           </div>
-        </form>
+        </form> -->
         <br />
         <br />
         <div class="row">
           <div class="col-sm col-8">
             <h2 class="text-center">Latest Books</h2>
             <hr />
-            {%  for book in books %}
+            <table class="datatable table table-striped">
+                <thead>
+                  <tr>
+                    <th>Cover</th>
+                    <th>Title</th>
+                    <th>Author:</th>
+                    <th>Genre:</th>
+                    <th>ISBN:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {%  for book in books %}
+                  <tr>
+                    <td><img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;"></td>
+                    <td><a href="{% url 'bookDetail' book.id %}">{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td> {{book.genre}} </td>
+                    <td> {{book.isbn}} </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            <!-- {%  for book in books %}
             <div class="media" style="padding-bottom: 10px;">
               <img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;">
               <div class="media-body">
@@ -29,7 +51,7 @@
             </div>
           </div>
           <hr />
-            {% endfor %}
+            {% endfor %} -->
           </div>
           <div class="col-sm col-4">
             {% if error %}
@@ -69,7 +91,7 @@
             </div>
           </div>
         </div>
-        <nav aria-label="Page navigation blog">
+        <!-- <nav aria-label="Page navigation blog">
           <ul class="pagination justify-content-center">
             {% if books.has_previous %}
             <li class="page-item">
@@ -83,7 +105,7 @@
               <a href="#" class="page-link">previous</a>
             </li>
             {% endif %}
-              <!-- Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}. -->
+               Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
               <li class="page-item active">
                 <a class="page-link" href="#" class="page-link">{{ books.number }} <span class="sr-only">(current)</span></a>
               </li>
@@ -100,7 +122,7 @@
             </li>
             {% endif %}
             </ul>
-        </nav>
+        </nav> -->
 
 
 {% endblock %}

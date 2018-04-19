@@ -9,11 +9,11 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 def bookHome(request):
-    books_list = Book.objects.all()
-    paginator = Paginator(books_list, 5)
-
-    page = request.GET.get('page')
-    books = paginator.get_page(page)
+    books = Book.objects.all()
+    # paginator = Paginator(books_list, 5)
+    #
+    # page = request.GET.get('page')
+    # books = paginator.get_page(page)
     return render(request, 'books/bookHome.html', {'books':books})
 
 def bookDetail(request,book_id):
