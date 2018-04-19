@@ -3,7 +3,7 @@
 
       <div class="container">
         <h1 class="text-center">Card Collection</h1>
-        <form class="" action="{% url 'cardSearch' %}" method="post">
+        <!-- <form class="" action="{% url 'cardSearch' %}" method="post">
           {% csrf_token %}
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Search for Cards" aria-label="searchbar" aria-describedby="basic-addon2" name="cardSearchItem">
@@ -11,14 +11,36 @@
               <input class="btn btn-outline-secondary" type="submit" name="submit" value="Search Cards">
             </div>
           </div>
-        </form>
+        </form> -->
         <br />
         <br />
         <div class="row">
           <div class="col-sm col-lg-8">
             <h2 class="text-center">Latest Cards</h2>
             <hr />
-            {%  for card in cards %}
+            <table class="datatable table table-striped">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Set</th>
+                    <th>Artist</th>
+                    <th>Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {%  for card in cards %}
+                  <tr>
+                    <td><img class="mr-3" src="{{card.findUrl}}" alt=" "></td>
+                    <td><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></td>
+                    <td>{{ card.set }}</td>
+                    <td> {{ card.artist }} </td>
+                    <td> {{ card.quantity }} </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            <!-- {%  for card in cards %}
             <div class="media" style="padding-bottom: 10px;">
               <img class="mr-3" src="{{card.findUrl}}" alt=" ">
               <div class="media-body">
@@ -30,7 +52,7 @@
             </div>
           </div>
           <hr />
-            {% endfor %}
+            {% endfor %} -->
           </div>
           <div class="col-sm col-lg-4">
             {% if error %}
@@ -70,7 +92,7 @@
             </div>
           </div>
         </div>
-        <nav aria-label="Page navigation blog">
+        <!-- <nav aria-label="Page navigation blog">
           <ul class="pagination justify-content-center">
             {% if cards.has_previous %}
             <li class="page-item">
@@ -100,7 +122,7 @@
             </li>
             {% endif %}
             </ul>
-        </nav>
+        </nav> -->
 
 
 {% endblock %}

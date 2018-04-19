@@ -8,11 +8,11 @@ import time
 
 # Create your views here.
 def cardHome(request):
-    cards_list = Card.objects.all()
-    paginator = Paginator(cards_list, 5)
-
-    page = request.GET.get('page')
-    cards = paginator.get_page(page)
+    cards = Card.objects.all()
+    # paginator = Paginator(cards_list, 5)
+    #
+    # page = request.GET.get('page')
+    # cards = paginator.get_page(page)
     return render(request, 'cards/cardHome.html', {'cards':cards})
 
 def cardDetail(request,card_id):
