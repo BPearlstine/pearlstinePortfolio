@@ -2,12 +2,32 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col lg-4">
+    <div class="col lg-3">
       <a href="{% url 'cardHome' %}"><h1 class="text-center">Card Collection</h1></a>
       <br />
       <h2 class="text-center">Latest Cards</h2>
       <hr />
-      {%  for card in latest_cards.all %}
+      <table class="datatable table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Set</th>
+              <th>Artist</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+              {%  for card in latest_cards.all %}
+            <tr>
+              <td><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></td>
+              <td>{{ card.set }}</td>
+              <td> {{ card.artist }} </td>
+              <td> {{ card.quantity }} </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      <!-- {%  for card in latest_cards.all %}
       <div class="media" style="padding-bottom: 10px;">
         <img class="mr-3" src="{{card.findUrl}}" alt=" ">
         <div class="media-body">
@@ -19,14 +39,34 @@
       </div>
       <hr>
     </div>
-      {% endfor %}
+      {% endfor %} -->
     </div>
-    <div class="col lg-4">
+    <div class="col lg-3">
       <a href="{% url 'bookHome' %}"><h1 class="text-center">Book Collection</h1></a>
       <br />
       <h2 class="text-center">Latest Books</h2>
       <hr />
-      {%  for book in latest_books.all %}
+      <table class="datatable table table-striped">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author:</th>
+              <th>Genre:</th>
+              <th>ISBN:</th>
+            </tr>
+          </thead>
+          <tbody>
+              {%  for book in latest_books.all %}
+            <tr>
+              <td><a href="{% url 'bookDetail' book.id %}">{{book.title}}</td>
+              <td>{{book.author}}</td>
+              <td> {{book.genre}} </td>
+              <td> {{book.isbn}} </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      <!-- {%  for book in latest_books.all %}
       <div class="media" style="padding-bottom: 10px;">
         <img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;">
         <div class="media-body">
@@ -37,14 +77,34 @@
       </div>
       <hr>
     </div>
-      {% endfor %}
+      {% endfor %} -->
     </div>
-    <div class="col lg-4">
+    <div class="col lg-3">
       <a href="{% url 'comicHome' %}"><h1 class="text-center">Comic Collection</h1></a>
       <br />
       <h2 class="text-center">Latest Comics</h2>
       <hr />
-      {%  for comic in latest_comics.all %}
+      <table class="datatable table table-striped">
+          <thead>
+            <tr>
+              <th>Title - Issue</th>
+              <th>Publisher:</th>
+              <th>Graded:</th>
+              <th>Key Issue:</th>
+            </tr>
+          </thead>
+          <tbody>
+              {%  for comic in latest_comics.all %}
+            <tr>
+              <td><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{comic.issue}}</a></td>
+              <td>{{comic.publisher}}</td>
+              <td> {{comic.graded}} </td>
+              <td> {{comic.key}} </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      <!-- {%  for comic in latest_comics.all %}
       <div class="container">
         <h3><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{comic.issue}}</a></h3>
         <br />
@@ -53,7 +113,7 @@
         <b>Key Issue: </b>{{comic.key}}
         <hr />
       </div>
-      {% endfor %}
+      {% endfor %} -->
     </div>
   </div>
 </div>
