@@ -3,7 +3,7 @@
 
       <div class="container">
         <h1 class="text-center">Comic Collection</h1>
-          <form class="" action="{% url 'comicSearch' %}" method="post">
+          <!-- <form class="" action="{% url 'comicSearch' %}" method="post">
             {% csrf_token %}
             <div class="input-group mb-3">
               <input type="text" class="form-control" placeholder="Search for comics" aria-label="searchbar" aria-describedby="basic-addon2" name="comicSearchTerm">
@@ -11,14 +11,34 @@
                 <input class="btn btn-outline-secondary" type="submit" name="submit" value="Search Comics" >
               </div>
             </div>
-          </form>
+          </form> -->
         <br />
         <br />
         <div class="row">
           <div class="col-sm col-8">
             <h2 class="text-center">Latest Comics</h2>
             <hr />
-            {%  for comic in comics %}
+            <table class="datatable table table-striped">
+                <thead>
+                  <tr>
+                    <th>Title - Issue</th>
+                    <th>Publisher:</th>
+                    <th>Graded:</th>
+                    <th>Key Issue:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {%  for comic in comics%}
+                  <tr>
+                    <td><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{comic.issue}}</a></td>
+                    <td>{{comic.publisher}}</td>
+                    <td> {{comic.graded}} </td>
+                    <td> {{comic.key}} </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            <!-- {%  for comic in comics %}
             <div class="container">
               <h3><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{ comic.issue }}</a></h3>
               <br />
@@ -27,7 +47,7 @@
               <b>Key Issue: </b>{{comic.key}}
               <hr />
             </div>
-            {% endfor %}
+            {% endfor %} -->
           </div>
           <div class="col-sm col-4">
             {% if error %}
@@ -73,7 +93,7 @@
             </div>
           </div>
         </div>
-        <nav aria-label="Page navigation blog">
+        <!-- <nav aria-label="Page navigation blog">
           <ul class="pagination justify-content-center">
             {% if comics.has_previous %}
             <li class="page-item">
@@ -103,7 +123,7 @@
             </li>
             {% endif %}
             </ul>
-        </nav>
+        </nav> -->
 
 
 {% endblock %}

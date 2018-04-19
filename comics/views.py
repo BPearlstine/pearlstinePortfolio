@@ -6,11 +6,11 @@ from .models import Comic
 
 # Create your views here.
 def comicHome(request):
-    comics_list = Comic.objects.all()
-    paginator = Paginator(comics_list, 5)
-
-    page = request.GET.get('page')
-    comics = paginator.get_page(page)
+    comics = Comic.objects.all()
+    # paginator = Paginator(comics_list, 5)
+    #
+    # page = request.GET.get('page')
+    # comics = paginator.get_page(page)
     return render(request, 'comics/comicHome.html', {'comics':comics})
 
 def comicDetail(request,comic_id):
