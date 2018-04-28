@@ -21,7 +21,7 @@
             <table class="datatable table table-striped">
                 <thead>
                   <tr>
-                    <th>Cover</th>
+                    <!-- <th>Cover</th> -->
                     <th>Title</th>
                     <th>Author:</th>
                     <th>Genre:</th>
@@ -31,7 +31,7 @@
                 <tbody>
                     {%  for book in books %}
                   <tr>
-                    <td><img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;"></td>
+                    <!-- <td><img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;"></td> -->
                     <td><a href="{% url 'bookDetail' book.id %}">{{book.title}}</td>
                     <td>{{book.author}}</td>
                     <td> {{book.genre}} </td>

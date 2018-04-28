@@ -3,6 +3,9 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Comic
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 def comicHome(request):
@@ -19,6 +22,7 @@ def comicDetail(request,comic_id):
 
 @login_required(login_url="/accounts/login")
 def addComic(request):
+    logger.info("begin add comic")
     if request.POST['comicTitle'] and request.POST['comicIssue'] and request.POST['comicPublisher'] and request.POST['comicGraded'] and request.POST['comicKey']:
         for comic in Comic.objects.all():
             if comic.title == request.POST['comicTitle'] and comic.issue == request.POST['comicIssue']:
