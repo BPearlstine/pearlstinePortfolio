@@ -2,17 +2,63 @@
 {% block content %}
 
       <div class="container">
-        <div class="media">
-          <!-- <img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;"> -->
-          <div class="media-body">
-            <h1 class="mt-0">{{book.title}}</h1>
-            <b>Author:</b> {{book.author}}<br>
-            <b>Genre:</b> {{book.genre}}<br>
-            <b>ISBN: </b> {{book.isbn}}
+        <div class="row">
+          <div class="col">
+            <div class="media">
+              <!-- <img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;"> -->
+              <div class="media-body">
+                <h1 class="mt-0">{{book.title}}</h1>
+                <b>Author:</b> {{book.author}}
+                <br>
+                <b>Genre:</b> {{book.genre}}
+                <br>
+                <b>ISBN: </b> {{book.isbn}}
+              </div>
+            </div>
+          </div>
+        <div class="col">
+          {% if user.is_authenticated %}
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#bookEdit" aria-expanded="false" aria-controls="bookEdit">
+              Edit book
+            </button>
+          {% endif %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="collapse" id="bookEdit">
+          <hr>
+          <br>
+          <form action="{% url 'updateBook' book.id %}" method="post">
+            {% csrf_token %}
+            <div class="form-row">
+              <div class="col">
+                <label for="bookTitle">Title</label>
+                <input type="text" class="form-control" id="bookTitle" name="bookTitle" placeholder="{{ book.title }}">
+              </div>
+              <div class="col">
+                <label for="bookAuthor">Author</label>
+                <input type="text" class="form-control" id="bookAuthor" name="bookAuthor" placeholder="{{ book.author }}">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <label for="bookGenre">Genre</label>
+                <input type="text" class="form-control" id="bookGenre" name="bookGenre" placeholder="{{ book.genre }}">
+              </div>
+              <div class="col">
+                <label for="bookIsbn">Isbn</label>
+                <input type="text" class="form-control" id="bookIsbn" name="bookIsbn" placeholder="{{ book.isbn }}">
+              </div>
+            </div>
+            <div class="form-row">
+              <br>
+              <br>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
         </div>
       </div>
       <hr>
         <h4 class="text-center"><a href="{% url 'bookHome' %}">Back to Book Collection</a></h4>
       </div>
-
 {% endblock %}

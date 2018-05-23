@@ -20,6 +20,19 @@ def bookDetail(request,book_id):
     book = get_object_or_404(Book, pk=book_id)
     return render(request, 'books/bookDetail.html',{'book':book})
 
+def updateBook(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    if request.POST['bookTitle']:
+        book.title = request.POST['bookTitle']
+    if request.POST['bookAuthor']:
+        book.author = request.POST['bookAuthor']
+    if request.POST['bookGenre']:
+        book.genre = request.POST['bookGenre']
+    if request.POST['bookIsbn']:
+        book.isbn = request.POST['bookIsbn']
+    book.save()
+    return redirect('bookDetail', book.id)
+
 @login_required(login_url="/accounts/login")
 def addBook(request):
     if request.POST['bookTitle'] and request.POST['bookAuthor'] and request.POST['bookGenre'] and request.POST['bookIsbn']:
