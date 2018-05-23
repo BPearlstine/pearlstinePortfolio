@@ -19,6 +19,20 @@ def cardDetail(request,card_id):
     card = get_object_or_404(Card, pk=card_id)
     return render(request, 'cards/cardDetail.html',{'card':card})
 
+
+def updateCard(request, card_id):
+    card = get_object_or_404(Card, pk=card_id)
+    if request.POST['cardName']:
+        card.name = request.POST['cardName']
+    if request.POST['cardSet']:
+        card.set = request.POST['cardSet']
+    if request.POST['cardArtist']:
+        card.artist = request.POST['cardArtist']
+    if request.POST['cardQuantity']:
+        card.quantity = request.POST['cardQuantity']
+    card.save()
+    return redirect('cardDetail', card.id)
+
 @login_required(login_url="/accounts/login")
 def addCard(request):
     if request.POST['cardName'] and request.POST['cardSet'] and request.POST['cardArtist'] and request.POST['cardQuantity']:

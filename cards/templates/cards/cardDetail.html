@@ -1,18 +1,66 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-  <div class="media">
-      <!-- {{card.findUrl}} -->
-    <img class="mr-3" src="#" alt=" ">
-    <div class="media-body">
-      <h1 class="mt-0">{{card.name}}</h1>
-      <b>Set:</b> {{card.set}}<br>
-      <b>Artist:</b> {{card.artist}}<br>
-      <!-- {{card.price}} -->
-      <b>Price: </b>Price <br>
-      <b>Quantity: </b> {{card.quantity}}
+  <div class="row">
+    <div class="col">
+      <div class="media">
+        <!-- {{card.findUrl}} -->
+        <img class="mr-3" src="#" alt=" ">
+        <div class="media-body">
+          <h1 class="mt-0">{{card.name}}</h1>
+          <b>Set:</b> {{card.set}}
+          <br>
+          <b>Artist:</b> {{card.artist}}
+          <br>
+          <!-- {{card.price}} -->
+          <!-- <b>Price: </b>Price -->
+          <!-- <br> -->
+          <b>Quantity: </b> {{card.quantity}}
+        </div>
+      </div>
+    </div>
+    <div class="col">
+         {% if user.is_authenticated %}
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#cardEdit" aria-expanded="false" aria-controls="cardEdit">
+            Edit card
+          </button>
+        {% endif %}
+    </div>
   </div>
-</div>
+  <div class="row">
+    <div class="collapse" id="cardEdit">
+      <hr>
+      <br>
+      <form action="{% url 'updateCard' card.id %}" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="col">
+            <label for="cardName">Name</label>
+            <input type="text" class="form-control" id="cardName" name="cardName" placeholder="{{ card.name }}">
+          </div>
+          <div class="col">
+            <label for="cardSet">Set</label>
+            <input type="text" class="form-control" id="cardSet" name="cardSet" placeholder="{{ card.set }}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col">
+            <label for="cardArtist">Artist</label>
+            <input type="text" class="form-control" id="cardArtist" name="cardArtist" placeholder="{{ card.artist }}">
+          </div>
+          <div class="col">
+            <label for="cardQuantity">Quantity</label>
+            <input type="text" class="form-control" id="cardQuantity" name="cardQuantity" placeholder="{{ card.quantity }}">
+          </div>
+        </div>
+        <div class="form-row">
+          <br>
+          <br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
 <hr>
   <h4 class="text-center"><a href="{% url 'cardHome' %}">Back to Card Collection</a></h4>
 </div>

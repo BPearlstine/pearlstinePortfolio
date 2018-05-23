@@ -18,11 +18,16 @@ def comicHome(request):
 
 def updateComic(request, comic_id):
     comic = get_object_or_404(Comic, pk=comic_id)
-    comic.title = request.POST['comicTitle']
-    comic.issue = request.POST['comicIssue']
-    comic.publisher = request.POST['comicPublisher']
-    comic.graded = request.POST['comicGraded']
-    comic.key = request.POST['comicKey']
+    if request.POST['comicTitle']:
+        comic.title = request.POST['comicTitle']
+    if request.POST['comicIssue']:
+        comic.issue = request.POST['comicIssue']
+    if request.POST['comicPublisher']:
+        comic.publisher = request.POST['comicPublisher']
+    if request.POST['comicGraded']:
+        comic.graded = request.POST['comicGraded']
+    if request.POST['comicKey']:
+        comic.key = request.POST['comicKey']
     comic.save()
     return redirect('comicDetail', comic.id)
 

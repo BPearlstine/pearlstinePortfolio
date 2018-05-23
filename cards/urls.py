@@ -6,4 +6,5 @@ urlpatterns = [
     path('<int:card_id>/', views.cardDetail, name='cardDetail'),
     path('addCard/', views.addCard, name='addCard'),
     path('results/', views.cardSearch, name='cardSearch'),
+    path('update/<int:card_id>/', views.updateCard, name='updateCard'),
 ]
