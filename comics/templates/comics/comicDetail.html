@@ -1,15 +1,65 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-  <div class="media">
-    <!-- <img class="mr-3" src="#" alt="Generic placeholder image"> -->
-    <div class="media-body">
-      <h1 class="mt-0">{{comic.title}} {{comic.issue}}</h1>
-      <b>Publisher: </b>{{comic.publisher}}<br>
-      <b>Graded:</b> {{comic.graded}}<br>
-      <b>Key: </b> {{comic.key}}
+  <div class="row">
+    <div class="col">
+      <div class="media">
+        <!-- <img class="mr-3" src="#" alt="Generic placeholder image"> -->
+        <div class="media-body">
+          <h1 class="mt-0">{{comic.title}} {{comic.issue}}</h1>
+          <b>Publisher: </b>{{comic.publisher}}
+          <br>
+          <b>Graded:</b> {{comic.graded}}
+          <br>
+          <b>Key: </b> {{comic.key}}
+        </div>
+      </div>
+    </div>
+    <div class="col">
+        {% if user.is_authenticated %}
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#comicEdit" aria-expanded="false" aria-controls="comicEdit">
+          Edit Comic
+        </button>
+       {% endif %}
+    </div>
   </div>
-</div>
+  <div class="row">
+    <div class="collapse" id="comicEdit">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="col">
+              <label for="comicTitle">Title</label>
+              <input type="text" class="form-control" id="comicTitle" placeholder="{{ comic.title }}">
+            </div>
+            <div class="col">
+              <label for="comicIssue">Issue</label>
+              <input type="text" class="form-control" id="comicIssue" placeholder="{{ comic.issue }}">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <label for="comicPublisher">Publisher</label>
+              <input type="text" class="form-control" id="comicPublisher" placeholder="{{ comic.publisher }}">
+            </div>
+            <div class="col">
+              <label for="comicGraded">Grade</label>
+              <input type="text" class="form-control" id="comicGraded" placeholder="{{ comic.graded }}">
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="comicKey">Key description</label>
+            <textarea name="comicKey" id="comicKey" cols="30" rows="10" class="form-control">{{ comic.key }}</textarea>
+          </div>
+          <div class="form-row">
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+    </div>
+  </div>
+
 <hr>
   <h4 class="text-center"><a href="{% url 'comicHome' %}">Back to Comic Collection</a></h4>
 </div>
