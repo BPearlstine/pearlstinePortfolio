@@ -25,26 +25,27 @@
   </div>
   <div class="row">
     <div class="collapse" id="comicEdit">
-        <form action="" method="post">
+      <hr><br>
+        <form action="{% url 'updateComic' comic.id %}" method="post">
           {% csrf_token %}
           <div class="form-row">
             <div class="col">
               <label for="comicTitle">Title</label>
-              <input type="text" class="form-control" id="comicTitle" placeholder="{{ comic.title }}">
+              <input type="text" class="form-control" id="comicTitle" name="comicTitle" placeholder="{{ comic.title }}">
             </div>
             <div class="col">
               <label for="comicIssue">Issue</label>
-              <input type="text" class="form-control" id="comicIssue" placeholder="{{ comic.issue }}">
+              <input type="text" class="form-control" id="comicIssue" name="comicIssue" placeholder="{{ comic.issue }}">
             </div>
           </div>
           <div class="form-row">
             <div class="col">
               <label for="comicPublisher">Publisher</label>
-              <input type="text" class="form-control" id="comicPublisher" placeholder="{{ comic.publisher }}">
+              <input type="text" class="form-control" id="comicPublisher" name="comicPublisher" placeholder="{{ comic.publisher }}">
             </div>
             <div class="col">
               <label for="comicGraded">Grade</label>
-              <input type="text" class="form-control" id="comicGraded" placeholder="{{ comic.graded }}">
+              <input type="text" class="form-control" id="comicGraded" name="comicGraded" placeholder="{{ comic.graded }}">
             </div>
           </div>
           <div class="form-row">
