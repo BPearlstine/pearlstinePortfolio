@@ -4,6 +4,12 @@
     <div class="row">
         <h2>Hangman</h2>
     </div>
+    <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
+        <strong>Sorry!</strong> That letter wasn't in the word, try again!.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div class="row" id="gameBody"></div>
     <div class="row" id="guesses"></div>
     <div class="row" >
@@ -31,11 +37,16 @@
             dataType: 'json',
             success: function (data){
                 $('#guesses').append("<input type='text' id='word' value='"+data.word+"' hidden>")
+                $('#guesses').append("<input type='text' id='letters' value='" + data.letters + "' hidden>")
+                $('#guesses').append("<input type='text' id='chances' value='6' hidden>")
                 $('#guesses').append("<h3><p id='numLetters'></p></h3>");
                 var dashes = '';
+                var dashList = '';
                 for(var i = 0;i < data.count;i++){
                     dashes += "_ ";
+                    dashList += "_,";
                 }
+                $('#guesses').append("<input type='text' id='dash' value='" + dashList + "' hidden>")
                 $('#numLetters').text(dashes);
             }
         });
@@ -44,26 +55,37 @@
     $('#ajaxBTN').click(function(){
 
         console.log('So Clicked');
-        var letter = $('#letter').value;
-        var word = $('#word').value;
+        var letter = $('#letter').val();
+        $('#letter').val('');
+        var word = $('#word').val();
+        var letters = $('#letters').val();
+        var chances = $('#chances').val();
+        var innerText = $('#dash').val();
 
         $.ajax ({    
             type: 'GET', 
             url: 'ajax/checkLetter',
             data: {
                 'letter': letter,
-                'word': word
+                'word': word,
+                'letters': letters,
+                'chances': chances,
+                'innerText': innerText
             },
             dataType: 'json',
-            success: function (data) {
-                
-                if (data.in_word){
-                    console.log("Show alert");
-                    alert("Hooray");
-                } else{
-                    console.log("womp");
-                    
-                    console.log(data);
+            success: function (data) {               
+                if (data.correct == true){
+                    console.log(data.innerText);
+                    $('#numLetters').text(data.innerText);
+                    $('#letters').html(data.letters);
+                    $('#dash').val(data.innerText);
+                } else{                   
+                    $('#chances').val(data.chances);
+                    $('#alert').toggle();
+                    var chances = 7 - parseInt(data.chances);
+                    console.log(chances);                    
+                    var nextImage = "/media/images/hangman" + chances + ".png";
+                    $('#gameBody').html("<img src='"+nextImage+"'>");
                 }
             }
         });
