@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from django.conf .urls.static import static
+from django.conf.urls.static import static
 import jobs.views
 import hangman.views
 import myCollections.views
@@ -26,11 +26,17 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', jobs.views.home, name='home'),
     path('jobs/newJob', jobs.views.newJob, name='newJob'),
-    path('hangman/', hangman.views.hangman, name='hangman' ),
     path('collections/', myCollections.views.collections, name='collections'),
     path('blog/', include('blog.urls')),
     path('accounts/', include('accounts.urls')),
     path('cards/', include('cards.urls')),
     path('books/', include('books.urls')),
     path('comics/', include('comics.urls')),
+    path('hangman/', include('hangman.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/',include(debug_toolbar.urls)),
+    ] + urlpatterns

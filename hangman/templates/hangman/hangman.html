@@ -1,5 +1,73 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2 class="text-center">Coming Soon</h2>
+<div class="container">
+    <div class="row">
+        <h2>Hangman</h2>
+    </div>
+    <div class="row" id="gameBody"></div>
+    <div class="row" id="guesses"></div>
+    <div class="row" >
+        <button type="button" class="btn btn-primary btn-sm" id="playBTN">Do you want to Play?</button>
+        <label for="letter" style="display: none" id="letterLabel">Guess a Letter!</label>
+        <input type="text" id="letter" class="form-control" style="display: none">
+        <button type="button" class="btn btn-primary btn-sm" id="ajaxBTN" style="display: none">Submit</button>
+    </div>
+</div>
 
+
+
+<script>
+
+    $('#playBTN').click(function(){
+        this.hidden = true;
+        $('#letterLabel').toggle();
+        $('#letter').toggle();
+        $('#ajaxBTN').toggle();
+        $('#gameBody').append("<img src='/media/images/hangman1.png'>");
+        $.ajax ({
+            type: 'GET',
+            url: 'ajax/beginGame',
+            data: {},
+            dataType: 'json',
+            success: function (data){
+                $('#guesses').append("<input type='text' id='word' value='"+data.word+"' hidden>")
+                $('#guesses').append("<h3><p id='numLetters'></p></h3>");
+                var dashes = '';
+                for(var i = 0;i < data.count;i++){
+                    dashes += "_ ";
+                }
+                $('#numLetters').text(dashes);
+            }
+        });
+    });
+
+    $('#ajaxBTN').click(function(){
+
+        console.log('So Clicked');
+        var letter = $('#letter').value;
+        var word = $('#word').value;
+
+        $.ajax ({    
+            type: 'GET', 
+            url: 'ajax/checkLetter',
+            data: {
+                'letter': letter,
+                'word': word
+            },
+            dataType: 'json',
+            success: function (data) {
+                
+                if (data.in_word){
+                    console.log("Show alert");
+                    alert("Hooray");
+                } else{
+                    console.log("womp");
+                    
+                    console.log(data);
+                }
+            }
+        });
+
+    });
+</script>
 {% endblock %}
