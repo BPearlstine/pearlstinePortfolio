@@ -4,19 +4,26 @@
     <div class="row">
         <h2>Hangman</h2>
     </div>
-    <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
-        <strong>Sorry!</strong> That letter wasn't in the word, try again!.
-        <button type="button" class="close" id="close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="row" id="alerts">
+        <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
+            <strong>Sorry!</strong> That letter wasn't in the word, try again!.
+            <button type="button" class="close" id="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </div>
+
     <div class="row" id="gameBody"></div>
     <div class="row" id="guesses"></div>
     <div class="row" >
-        <button type="button" class="btn btn-primary btn-sm" id="playBTN">Do you want to Play?</button>
-        <label for="letter" style="display: none" id="letterLabel">Guess a Letter!</label>
-        <input type="text" id="letter" class="form-control" style="display: none">
-        <button type="button" class="btn btn-primary btn-sm" id="ajaxBTN" style="display: none">Submit</button>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary btn-sm" id="playBTN">Do you want to Play?</button>
+            <label for="letter" style="display: none" id="letterLabel">Guess a Letter!</label>
+            <input type="text" id="letter" class="form-control" style="display: none">
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary btn-sm" id="ajaxBTN" style="display: none">Submit</button>
+        </div>       
     </div>
 </div>
 
@@ -25,7 +32,7 @@
 <script>
 
     $('#playBTN').click(function(){
-        this.hidden = true;
+        $('#playBTN').toggle();
         $('#letterLabel').toggle();
         $('#letter').toggle();
         $('#ajaxBTN').toggle();
@@ -48,6 +55,12 @@
                 }
                 $('#guesses').append("<input type='text' id='dash' value='" + dashList + "' hidden>")
                 $('#numLetters').text(dashes);
+                $('#alerts').append("<div id='endGame' class='alert alert - danger alert - dismissible fade show' role='alert' style='display: none'>" +
+                    "<strong> Oh No!</strong> You weren't able to guess it, the word was "+ data.word +"." +
+                    "<button type ='button' class='close' id='close2'>" +
+                    "<span aria-hidden='true'>&times;</span>" +
+                    "</button>" +
+                    "</div>");                
             }
         });
     });
@@ -61,6 +74,9 @@
         var letters = $('#letters').val();
         var chances = $('#chances').val();
         var innerText = $('#dash').val();
+        if ($('#alert').is(':visible')) {
+            $('#alert').toggle();
+        }
 
         $.ajax ({    
             type: 'GET', 
@@ -79,13 +95,20 @@
                     $('#numLetters').text(data.innerText);
                     $('#letters').val(data.letters);
                     $('#dash').val(data.innerText);
-                } else{                   
-                    $('#chances').val(data.chances);
-                    $('#alert').toggle();
-                    var chances = 7 - parseInt(data.chances);
-                    console.log(chances);                    
-                    var nextImage = "/media/images/hangman" + chances + ".png";
-                    $('#gameBody').html("<img src='"+nextImage+"'>");
+                } else{
+                    if (data.chances > 0){
+                        $('#chances').val(data.chances);
+                        $('#alert').toggle();
+                        var chances = 7 - parseInt(data.chances);
+                        console.log(chances);
+                        var nextImage = "/media/images/hangman" + chances + ".png";
+                        $('#gameBody').html("<img src='" + nextImage + "'>");
+                    } else {
+                        $('#endGame').toggle();
+                        $('#gameBody').html("<img src='/media/images/hangman7.png'>");
+                        $('#ajaxBTN').prop('disabled',true);
+                    }                   
+
                 }
             }
         });
@@ -94,6 +117,16 @@
 
     $('#close').click(function(){
         $('#alert').toggle();
+    })
+
+    $('#close2').click(function(){
+        $('#endGame').toggle();
+        $('#letterLabel').toggle();
+        $('#letter').toggle();
+        $('#ajaxBTN').toggle();
+        $('ajaxBTN').prop('disabled',false);
+        $('#playBTN').toggle();
+
     })
 </script>
 {% endblock %}
