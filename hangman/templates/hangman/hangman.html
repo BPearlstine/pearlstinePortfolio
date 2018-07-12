@@ -6,7 +6,7 @@
     </div>
     <div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
         <strong>Sorry!</strong> That letter wasn't in the word, try again!.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <button type="button" class="close" id="close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -77,7 +77,7 @@
                 if (data.correct == true){
                     console.log(data.innerText);
                     $('#numLetters').text(data.innerText);
-                    $('#letters').html(data.letters);
+                    $('#letters').val(data.letters);
                     $('#dash').val(data.innerText);
                 } else{                   
                     $('#chances').val(data.chances);
@@ -91,5 +91,9 @@
         });
 
     });
+
+    $('#close').click(function(){
+        $('#alert').toggle();
+    })
 </script>
 {% endblock %}
