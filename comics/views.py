@@ -10,11 +10,12 @@ logger = logging.getLogger(__name__)
 # Create your views here.
 def comicHome(request):
     comics = Comic.objects.all()
-    # paginator = Paginator(comics_list, 5)
-    #
-    # page = request.GET.get('page')
-    # comics = paginator.get_page(page)
     return render(request, 'comics/comicHome.html', {'comics':comics})
+
+
+def comicDetail(request, comic_id):
+    comic = get_object_or_404(Comic, pk=comic_id)
+    return render(request, 'comics/comicDetail.html', {'comic': comic})
 
 def updateComic(request, comic_id):
     comic = get_object_or_404(Comic, pk=comic_id)
@@ -30,10 +31,6 @@ def updateComic(request, comic_id):
         comic.key = request.POST['comicKey']
     comic.save()
     return redirect('comicDetail', comic.id)
-
-def comicDetail(request,comic_id):
-    comic = get_object_or_404(Comic, pk=comic_id)
-    return render(request, 'comics/comicDetail.html',{'comic':comic})
 
 @login_required(login_url="/accounts/login")
 def addComic(request):
