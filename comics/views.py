@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Comic
+from .forms import AddComicForm
 import logging
 
 logger = logging.getLogger(__name__)
@@ -10,7 +11,8 @@ logger = logging.getLogger(__name__)
 # Create your views here.
 def comicHome(request):
     comics = Comic.objects.all()
-    return render(request, 'comics/comicHome.html', {'comics':comics})
+    form = AddComicForm()
+    return render(request, 'comics/comicHome.html', {'comics':comics,'form':form})
 
 def comicDetail(request, comic_id):
     comic = get_object_or_404(Comic, pk=comic_id)
@@ -34,18 +36,17 @@ def updateComic(request, comic_id):
 @login_required(login_url="/accounts/login")
 def addComic(request):
     logger.info("begin add comic")
-    if request.POST['comicTitle'] and request.POST['comicIssue'] and request.POST['comicPublisher'] and request.POST['comicGraded'] and request.POST['comicKey']:
-        for comic in Comic.objects.all():
-            if comic.title == request.POST['comicTitle'] and comic.issue == request.POST['comicIssue']:
-                return redirect('comicDetail',comic.id)
+    if request.POST:
+        form = AddComicForm(request.POST)
         comic = Comic()
-        comic.title = request.POST['comicTitle']
-        comic.issue = request.POST['comicIssue']
-        comic.publisher = request.POST['comicPublisher']
-        comic.graded = request.POST['comicGraded']
-        comic.key = request.POST['comicKey']
-        comic.save()
-        return redirect('comicDetail',comic.id)
+        if form.is_valid():           
+            comic.title = form.cleaned_data['title']
+            comic.issue = form.cleaned_data['issue']
+            comic.publisher = form.cleaned_data['publisher']
+            comic.graded = form.cleaned_data['graded']
+            comic.key = form.cleaned_data['key']
+            comic.save()
+        return redirect('comics:comicDetail',comic.id)
 
     else:
         return render(request, 'comics/comicHome.html', {'error':'All values must be filled out'})

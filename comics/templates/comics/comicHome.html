@@ -38,7 +38,15 @@
             <hr>
             <form class="" action="{% url 'comics:addComic' %}" method="post">
               {% csrf_token %}
-              <div class="input-group ">
+              <div class="input-group">
+                <table>
+                  {{form}}
+                </table>
+              </div>
+              
+                
+              
+              <!-- <div class="input-group ">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
                 </div>
@@ -67,7 +75,7 @@
                   <span class="input-group-text" id="inputGroup-sizing-default">Key</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="comicKey">
-              </div>
+              </div> -->
               <input type="submit" name="submit" value="Add new Comic" class="btn btn-primary">
               </form>
               <br>
