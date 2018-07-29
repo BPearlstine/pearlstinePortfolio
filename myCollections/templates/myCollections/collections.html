@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col lg-3">
-      <a href="{% url 'cardHome' %}"><h1 class="text-center">Card Collection</h1></a>
+      <a href="{% url 'cards:cardHome' %}"><h1 class="text-center">Card Collection</h1></a>
       <br />
       <h2 class="text-center">Latest Cards</h2>
       <hr />
@@ -19,7 +19,7 @@
           <tbody>
               {%  for card in latest_cards.all %}
             <tr>
-              <td><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></td>
+              <td><a href="{% url 'cards:cardDetail' card.id %}">{{card.name}}</a></td>
               <td>{{ card.set }}</td>
               <td> {{ card.artist }} </td>
               <td> {{ card.quantity }} </td>
@@ -42,7 +42,7 @@
       {% endfor %} -->
     </div>
     <div class="col lg-3">
-      <a href="{% url 'bookHome' %}"><h1 class="text-center">Book Collection</h1></a>
+      <a href="{% url 'books:bookHome' %}"><h1 class="text-center">Book Collection</h1></a>
       <br />
       <h2 class="text-center">Latest Books</h2>
       <hr />
@@ -58,7 +58,7 @@
           <tbody>
               {%  for book in latest_books.all %}
             <tr>
-              <td><a href="{% url 'bookDetail' book.id %}">{{book.title}}</td>
+              <td><a href="{% url 'books:bookDetail' book.id %}">{{book.title}}</td>
               <td>{{book.author}}</td>
               <td> {{book.genre}} </td>
               <td> {{book.isbn}} </td>

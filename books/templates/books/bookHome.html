@@ -3,7 +3,7 @@
 
       <div class="container">
         <h1 class="text-center">Book Collection</h1>
-        <!-- <form class="" action="{% url 'bookSearch' %}" method="post">
+        <!-- <form class="" action="{% url 'books:bookSearch' %}" method="post">
           {% csrf_token %}
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Search for Books" aria-label="searchbar" aria-describedby="basic-addon2" name='bookSearchTerm'>
@@ -32,7 +32,7 @@
                     {%  for book in books %}
                   <tr>
                     <!-- <td><img class="mr-3 rounded" src="{{book.cover}}" alt="Generic placeholder image" style="width: 135px;"></td> -->
-                    <td><a href="{% url 'bookDetail' book.id %}">{{book.title}}</td>
+                    <td><a href="{% url 'books:bookDetail' book.id %}">{{book.title}}</td>
                     <td>{{book.author}}</td>
                     <td> {{book.genre}} </td>
                     <td> {{book.isbn}} </td>
@@ -59,7 +59,7 @@
             {% endif %}
             <h2 class="text-center">Add New Books</h2>
             <hr>
-            <form class="" action="{% url 'addBook' %}" method="post">
+            <form class="" action="{% url 'books:addBook' %}" method="post">
               {% csrf_token %}
               <div class="input-group ">
                 <div class="input-group-prepend">
