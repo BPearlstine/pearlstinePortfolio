@@ -80,7 +80,7 @@
       {% endfor %} -->
     </div>
     <div class="col lg-3">
-      <a href="{% url 'comicHome' %}"><h1 class="text-center">Comic Collection</h1></a>
+      <a href="{% url 'comics:comicHome' %}"><h1 class="text-center">Comic Collection</h1></a>
       <br />
       <h2 class="text-center">Latest Comics</h2>
       <hr />
@@ -96,7 +96,7 @@
           <tbody>
               {%  for comic in latest_comics.all %}
             <tr>
-              <td><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{comic.issue}}</a></td>
+              <td><a href="{% url 'comics:comicDetail' comic.id %}">{{comic.title}} {{comic.issue}}</a></td>
               <td>{{comic.publisher}}</td>
               <td> {{comic.graded}} </td>
               <td> {{comic.key}} </td>

@@ -10,16 +10,6 @@ def buildComicObject(new_title, new_issue, new_graded, new_key, new_publisher):
 
 
 class TestComicsViews(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        print("SetupTestData: setting up non-modified data")
-        # self.client = Client()
-        # self.user = User.objects.create_user(username='testuser', password='12345')
-        # login = self.client.login(username='testuser', password='12345')
-    
-    def setup(self):
-        print("setup: run for every test to make sure there is clean data")
     
     def testNumberOfComics(self):
         print("testNumberOfComics: Check Current Number of Comics")
@@ -33,7 +23,9 @@ class TestComicsViews(TestCase):
         comics = Comic.objects.all()
         numComics = len(comics)
         self.assertEqual(numComics, 1)
-        # url = reverse('comics:comicDetail', args=(newComic.id,))
-        # response = self.client.get(url)       
-        # self.assertEqual(response.status_code, 200)
-
+        url = reverse('comics:comicDetail', args=(newComic.id,))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+    
+    def testAddingComicThroughView(self):
+        print("testAddingComicThroughView: test adding a new comic using comics/addComic")

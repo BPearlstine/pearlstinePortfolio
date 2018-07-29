@@ -12,7 +12,6 @@ def comicHome(request):
     comics = Comic.objects.all()
     return render(request, 'comics/comicHome.html', {'comics':comics})
 
-
 def comicDetail(request, comic_id):
     comic = get_object_or_404(Comic, pk=comic_id)
     return render(request, 'comics/comicDetail.html', {'comic': comic})
@@ -50,20 +49,3 @@ def addComic(request):
 
     else:
         return render(request, 'comics/comicHome.html', {'error':'All values must be filled out'})
-
-def comicSearch(request):
-    comics = Comic.objects.all()
-    searchItem = request.POST['comicSearchTerm'].upper()
-    matching = []
-    for comic in comics:
-        if searchItem in comic.title.upper() or searchItem in comic.publisher.upper() or searchItem in comic.issue.upper() or searchItem in comic.graded.upper() or searchItem in comic.key.upper():
-            matching.append(comic)
-    if not matching:
-        return render(request, 'comics/comicSearchResults.html', {'isEmpty': 'Sorry we could not find any matching comics'})
-    else:
-        paginator = Paginator(matching, 5)
-
-        page = request.GET.get('page')
-        matchingComics = paginator.get_page(page)
-        return render(request, 'comics/comicSearchResults.html', {'matchingComics': matchingComics})
-
