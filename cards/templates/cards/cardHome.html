@@ -33,7 +33,7 @@
                   <tr>
                     <!-- <td><img class="mr-3" src="{{card.findUrl}}" alt="No Image "></td> -->
                     <!-- <td>Image</td> -->
-                    <td><a href="{% url 'cardDetail' card.id %}">{{card.name}}</a></td>
+                    <td><a href="{% url 'cards:cardDetail' card.id %}">{{card.name}}</a></td>
                     <td>{{ card.set }}</td>
                     <td> {{ card.artist }} </td>
                     <td> {{ card.quantity }} </td>
@@ -61,7 +61,7 @@
             {% endif %}
             <h2 class="text-center">Add New Cards</h2>
             <hr>
-            <form class="" action="{% url 'addCard' %}" method="post">
+            <form class="" action="{% url 'cards:addCard' %}" method="post">
               {% csrf_token %}
               <div class="input-group ">
                 <div class="input-group-prepend">

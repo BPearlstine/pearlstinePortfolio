@@ -31,7 +31,7 @@
     <div class="collapse" id="cardEdit">
       <hr>
       <br>
-      <form action="{% url 'updateCard' card.id %}" method="post">
+      <form action="{% url 'cards:updateCard' card.id %}" method="post">
         {% csrf_token %}
         <div class="form-row">
           <div class="col">
@@ -62,7 +62,7 @@
     </div>
   </div>
 <hr>
-  <h4 class="text-center"><a href="{% url 'cardHome' %}">Back to Card Collection</a></h4>
+  <h4 class="text-center"><a href="{% url 'cards:cardHome' %}">Back to Card Collection</a></h4>
 </div>
 
 {% endblock %}
