@@ -3,15 +3,6 @@
 
       <div class="container">
         <h1 class="text-center">Comic Collection</h1>
-          <!-- <form class="" action="{% url 'comicSearch' %}" method="post">
-            {% csrf_token %}
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Search for comics" aria-label="searchbar" aria-describedby="basic-addon2" name="comicSearchTerm">
-              <div class="input-group-append">
-                <input class="btn btn-outline-secondary" type="submit" name="submit" value="Search Comics" >
-              </div>
-            </div>
-          </form> -->
         <br />
         <br />
         <div class="row">
@@ -30,7 +21,7 @@
                 <tbody>
                     {%  for comic in comics%}
                   <tr>
-                    <td><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{comic.issue}}</a></td>
+                    <td><a href="{% url 'comics:comicDetail' comic.id %}">{{comic.title}} {{comic.issue}}</a></td>
                     <td>{{comic.publisher}}</td>
                     <td> {{comic.graded}} </td>
                     <td> {{comic.key}} </td>
@@ -38,16 +29,6 @@
                   {% endfor %}
                 </tbody>
               </table>
-            <!-- {%  for comic in comics %}
-            <div class="container">
-              <h3><a href="{% url 'comicDetail' comic.id %}">{{comic.title}} {{ comic.issue }}</a></h3>
-              <br />
-              <b>Publisher: </b>{{comic.publisher}}<br>
-              <b>Graded: </b>{{comic.graded}}<br>
-              <b>Key Issue: </b>{{comic.key}}
-              <hr />
-            </div>
-            {% endfor %} -->
           </div>
           <div class="col-sm col-4">
             {% if error %}
@@ -55,9 +36,17 @@
             {% endif %}
             <h2 class="text-center">Add New Comics</h2>
             <hr>
-            <form class="" action="{% url 'addComic' %}" method="post">
+            <form class="" action="{% url 'comics:addComic' %}" method="post">
               {% csrf_token %}
-              <div class="input-group ">
+              <div class="input-group">
+                <table>
+                  {{form}}
+                </table>
+              </div>
+              
+                
+              
+              <!-- <div class="input-group ">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
                 </div>
@@ -86,44 +75,13 @@
                   <span class="input-group-text" id="inputGroup-sizing-default">Key</span>
                 </div>
                 <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="comicKey">
-              </div>
+              </div> -->
               <input type="submit" name="submit" value="Add new Comic" class="btn btn-primary">
               </form>
               <br>
             </div>
           </div>
         </div>
-        <!-- <nav aria-label="Page navigation blog">
-          <ul class="pagination justify-content-center">
-            {% if comics.has_previous %}
-            <li class="page-item">
-              <a href="?page=1" class="page-link">first</a>
-            </li>
-            <li class="page-item">
-            <a href="?page={{ comics.previous_page_number }}" class="page-link">{{ comics.previous_page_number }}</a>
-            </li>
-            {% else %}
-            <li class="page-item disabled">
-              <a href="#" class="page-link">previous</a>
-            </li>
-            {% endif %}
-              <li class="page-item active">
-                <a class="page-link" href="#" class="page-link">{{ comics.number }} <span class="sr-only">(current)</span></a>
-              </li>
-            {% if comics.has_next %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ comics.next_page_number }}">{{ comics.next_page_number }}</a>
-            </li>
-            <li class="page-item">
-              <a href="?page={{ comics.paginator.num_pages }}" class="page-link">last</a>
-            </li>
-            {% else %}
-            <li class="page-item disabled">
-              <a class="page-link" href="#">next</a>
-            </li>
-            {% endif %}
-            </ul>
-        </nav> -->
 
 
 {% endblock %}

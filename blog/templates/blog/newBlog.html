@@ -5,7 +5,7 @@
 {% endif %}
 <div class="col align-self-end text-center">
   <h4 class="">Add new Blog</h4>
-  <form class="" action="{% url 'newBlog' %}" method="post" enctype="multipart/form-data">
+  <form class="" action="{% url 'blog:newBlog' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <br>
     <div class="input-group mb-3">

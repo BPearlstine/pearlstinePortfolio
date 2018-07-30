@@ -28,7 +28,7 @@
         <div class="collapse" id="bookEdit">
           <hr>
           <br>
-          <form action="{% url 'updateBook' book.id %}" method="post">
+          <form action="{% url 'books:updateBook' book.id %}" method="post">
             {% csrf_token %}
             <div class="form-row">
               <div class="col">
@@ -59,6 +59,6 @@
         </div>
       </div>
       <hr>
-        <h4 class="text-center"><a href="{% url 'bookHome' %}">Back to Book Collection</a></h4>
+        <h4 class="text-center"><a href="{% url 'books:bookHome' %}">Back to Book Collection</a></h4>
       </div>
 {% endblock %}
