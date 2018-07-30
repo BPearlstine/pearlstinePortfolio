@@ -51,7 +51,7 @@
                 var dashList = '';
                 for(var i = 0;i < data.count;i++){
                     dashes += "_ ";
-                    dashList += "_,";
+                    dashList += "_ ";
                 }
                 $('#guesses').append("<input type='text' id='dash' value='" + dashList + "' hidden>")
                 $('#numLetters').text(dashes);
